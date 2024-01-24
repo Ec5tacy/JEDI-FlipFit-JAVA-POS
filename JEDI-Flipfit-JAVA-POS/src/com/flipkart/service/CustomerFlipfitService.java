@@ -1,6 +1,6 @@
 package com.flipkart.service;
 
-public class Customer_Service {
+public class CustomerFlipfitService {
 
     public void createCustomer(int id, String name, String emailAddress, int phone, String password) {
     }

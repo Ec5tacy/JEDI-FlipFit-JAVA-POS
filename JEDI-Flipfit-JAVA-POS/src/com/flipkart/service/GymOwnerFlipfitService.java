@@ -1,6 +1,6 @@
 package com.flipkart.service;
 
-public class Gym_Owner_Service {
+public class GymOwnerFlipfitService {
     public String getOwnerDetails(){
         return "get Owner Details";
     }
