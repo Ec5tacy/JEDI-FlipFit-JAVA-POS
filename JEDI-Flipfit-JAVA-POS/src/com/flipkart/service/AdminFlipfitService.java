@@ -1,6 +1,6 @@
 package com.flipkart.service;
 
-public class AdminService {
+public class AdminFlipfitService {
 
     public void viewPendingGymRequests(){
         System.out.println("view pending requests");
