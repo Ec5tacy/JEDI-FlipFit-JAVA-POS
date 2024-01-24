@@ -8,9 +8,9 @@ public class LandingPage {
        // System.out.println("<-----Enter your choice----->\n 1. Login \n 2.Registeratio0n of Gym Customer \n 3.Update Password \n 4.Exit");
         int choice=0;
         while(choice != 4) {
-            System.out.println("<-----Welcome to Flip Application----->");
+            System.out.println("<-----Welcome to FlipFit----->");
 
-            System.out.println("<-----Enter your choice----->\n 1. Login \n 2.Registeratio0n of Gym Customer \n 3.Update Password \n 4.Exit");
+            System.out.println("<-----Enter your choice----->\n 1.Login \n 2.Registration of Gym Customer \n 3.Update Password \n 4.Exit");
             choice = in.nextInt();
             in.nextLine();
             switch (choice) {
@@ -31,7 +31,64 @@ public class LandingPage {
                     switch (role) {
                         case 1:
                             System.out.println("Opening Customer Menu Page");
-                            //calling admin menu object
+                            System.out.println("----Choose the following options------");
+                            System.out.println("1. Select a GYM on the basis of location \n 2. View Booked Slots \n 3. Modify Personal Details");
+                            int customerChoice = in.nextInt();
+                            switch(customerChoice)
+                            {
+                                case 1:
+                                    System.out.println("Select the location of your GYM:\n 1. Marathalli \n 2. ETV");
+                                    int locChoice = in.nextInt();
+                                    switch(locChoice)
+                                    {
+                                        case 1:
+                                            System.out.println("GYMS at Marathalli \n1.GYM A\n 2. GYM B");
+                                            int gymChoiceMarathalli= in.nextInt();
+                                            switch(gymChoiceMarathalli)
+                                            {
+                                                case 1:
+                                                    System.out.println("1. View slot \n 2. Book a slot \n 3. Cancel slot");
+                                                    break;
+                                                case 2:
+                                                    System.out.println("1. View slot \n 2. Book a slot \n 3. Cancel slot");
+                                                    break;
+                                            }
+                                            break;
+                                        case 2:
+                                            System.out.println("GYMS at ETV \n1.GYM C\n 2. GYM D");
+                                            int gymChoiceETV= in.nextInt();
+                                            switch(gymChoiceETV)
+                                            {
+                                                case 1:
+                                                    System.out.println("1. View slot \n 2. Book a slot \n 3. Cancel slot");
+                                                    break;
+                                                case 2:
+                                                    System.out.println("1. View slot \n 2. Book a slot \n 3. Cancel slot");
+                                                    break;
+                                            }
+                                            break;
+
+
+                                    }
+
+                                    break;
+
+                                case 2:
+                                    System.out.println("Here are your Current Bookinga");
+                                    break;
+
+
+                                case 3:
+                                    System.out.println("Modify personal details page");
+                                    break;
+
+                                default:
+                                    System.out.println("Wrong Selection");
+
+
+
+
+                            }
                             break;
 
                         case 2:
