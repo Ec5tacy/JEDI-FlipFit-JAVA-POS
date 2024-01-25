@@ -104,9 +104,11 @@ public class CustomerFlipFitService implements CustomerFlipFitServiceInterface {
 
 		for (Booking b : bookings) {
 			if (b.getCustomerEmail().equals(email)) {
+				System.out.println("Booking ID: " + b.getBookingId() + " Gym ID: " + b.getGymId() + " Trainer Name: " + b.getTrainer());
 				customerBookings.add(b);
 			}
 		}
+
 		return customerBookings;
 	}
 	/**

@@ -48,7 +48,7 @@ public class CustomerClient {
 		List<Slot> slots = customerFlipFitService.getSlotInGym(gymId);
 		for (Slot slot : slots) {
 			System.out.print("Slot Id: " + slot.getSlotId());
-			System.out.print("Availability: " + customerFlipFitService.isSlotBooked(slot.getSlotId(), date));
+			System.out.print("Availability: " + !customerFlipFitService.isSlotBooked(slot.getSlotId(), date));
 		}
 		System.out.print("Enter the slot ID which you want to book: ");
 		String slotId = sc.next();
