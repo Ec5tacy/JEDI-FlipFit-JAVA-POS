@@ -5,7 +5,7 @@ import java.util.*;
 
 
 public interface CustomerFlipFitServiceInterface {
-    public Customer getProfile(Customer customer);
+    public Customer getProfile(String email);
     /*
     returns the customer profile
     */

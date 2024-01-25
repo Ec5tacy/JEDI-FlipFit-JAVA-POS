@@ -36,6 +36,17 @@ public class CustomerClient {
 
 	}
 
+	public void viewProfile(Scanner in, String email) {
+		customer = customerFlipFitService.getProfile(email);
+		System.out.println("______________________________________________________________");
+		System.out.printf("%15s%15s%15s%15s", "Customer Name", "Phone Number", "Address", "Age");
+		System.out.println();
+		System.out.printf("%15s%15s%15s%15s", customer.getName(), customer.getPhoneNumber(),
+				customer.getAddress(), customer.getAge(), customer.getEmail());
+		System.out.println("______________________________________________________________");
+
+	}
+
 	public void viewGyms(String email) throws ParseException {
 		getGyms();
 		System.out.print("Enter gym ID: ");
@@ -102,12 +113,12 @@ public class CustomerClient {
 		customerFlipFitService.cancelBooking(bookingId, email);
 	}
 
-	public void customerMenu(String email) throws ParseException {
+	public void customerMenu(Scanner in,String email) throws ParseException {
 		int choice = 0;
 
 		while (choice != 5) {
 			System.out.println("Menu:-");
-			System.out.println("1.View Gyms \n2.View Booked Slots \n3.Cancel Booked Slots \n4. Edit Profile \n5.Exit");
+			System.out.println("1.View Gyms \n2.View Booked Slots \n3.Cancel Booked Slots \n4. Edit Profile \n5.View Profile \n6.Exit");
 			System.out.print("Enter your choice: ");
 			choice = sc.nextInt();
 
@@ -125,6 +136,9 @@ public class CustomerClient {
 				editProfile(email);
 				break;
 			case 5:
+				viewProfile(in, email);
+				break;
+			case 6:
 				break;
 			default:
 				System.out.println("Invalid choice!");
