@@ -30,7 +30,7 @@ public class ApplicationClient {
 			if (roleId.equalsIgnoreCase("Customer")) {
 
 				CustomerClient customer = new CustomerClient();
-				customer.customerMenu(userEmail);
+				customer.customerMenu(in, userEmail);
 
 			} else if (roleId.equalsIgnoreCase("GymOwner")) {
 

@@ -19,10 +19,10 @@ public class CustomerFlipFitService implements CustomerFlipFitServiceInterface {
 	List<Gym> gyms = new ArrayList<>();
 
 	Date d1 = new Date();
-	Customer customer1 = new Customer("c1@gmail.com", "c1", "Customer", "Vaishnavi", "0000", 22, "Kanpur");
-	Customer customer2 = new Customer("c2@gmail.com", "c2", "Customer", "Anjali", "0000", 32, "Vadodara");
-	Customer customer3 = new Customer("c3@gmail.com", "c3", "Customer", "Sudha", "0000", 42, "Kolkata");
-	Customer customer4 = new Customer("c4@gmail.com", "c4", "Customer", "Aaishu", "0000", 52, "Mumbai");
+	Customer customer1 = new Customer("c1@gmail.com", "c1", "Customer", "Ishaan", "0000", 22, "Kanpur");
+	Customer customer2 = new Customer("c2@gmail.com", "c2", "Customer", "Dhruv", "0000", 32, "Vadodara");
+	Customer customer3 = new Customer("c3@gmail.com", "c3", "Customer", "Sahil", "0000", 42, "Kolkata");
+	Customer customer4 = new Customer("c4@gmail.com", "c4", "Customer", "Pranati", "0000", 52, "Mumbai");
 
 
 	Booking b1 = new Booking("123", "121", "171", "confirmed", d1, "c1@gmail.com", "John");
@@ -63,15 +63,16 @@ public class CustomerFlipFitService implements CustomerFlipFitServiceInterface {
 		gyms.add(gym4);
 	}
 
-	/**
-	 * Obtains customer's profile details 
-	 * @param customer the Customer object for which the profile details are requested
-	 * @return Customer the Customer's object
-	 */
-	public Customer getProfile(Customer customer) {
-		for (Customer cust : customers) {
-			if (cust.getEmail().equals(customer.getEmail()))
-				return cust;
+//	public Customer getProfile(Customer customer) {
+//		for (Customer cust : customers) {
+//			if (cust.getEmail().equals(customer.getEmail()))
+//				return cust;
+//		}
+//		return null;
+//	}
+	public Customer getProfile(String email) {
+		for(Customer customer: customers) {
+			if(customer.getEmail().equals(email)) return customer;
 		}
 		return null;
 	}
