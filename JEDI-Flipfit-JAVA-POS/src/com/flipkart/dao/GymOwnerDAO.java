@@ -1,30 +1,26 @@
 package com.flipkart.dao;
 
-import com.flipkart.bean.Gym_Owner;
+import com.flipkart.bean.GymOwner;
 
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class GymOwnerDAO implements GymOwnerInterfaceDAO {
-    List<Gym_Owner> gymOwnerList;
+    List<GymOwner> gymOwnerList;
 
     public GymOwnerDAO() {
     }
 
-    public List<Gym_Owner> getGymOwnerList() {
+    public List<GymOwner> getGymOwnerList() {
 
-        List<Gym_Owner> resGymOwnerList = new ArrayList<>();
+        List<GymOwner> resGymOwnerList = new ArrayList<>();
 
         this.setGymOwnerList(resGymOwnerList);
         return gymOwnerList;
     }
 
-    public void setGymOwnerList(List<Gym_Owner> gymOwnerList) {
+    public void setGymOwnerList(List<GymOwner> gymOwnerList) {
         this.gymOwnerList = gymOwnerList;
     }
 
@@ -32,14 +28,27 @@ public class GymOwnerDAO implements GymOwnerInterfaceDAO {
         return false;
     }
 
-    public void registerGymOwner(Gym_Owner gymOwner) {
+    public void registerGymOwner(GymOwner gymOwner) {
 
-        public List<Gym_Owner> getPendingGymOwnerList () {
+    }
 
-            List<Gym_Owner> pendingList = new ArrayList<>();
+    @Override
+    public List<GymOwner> getPendingGymOwnerList() {
+        return null;
+    }
 
+    @Override
+    public void sendOwnerApprovalRequest(String gymOwnerId) {
 
-        }
+    }
+
+    @Override
+    public void setPendingGymOwnerList() {
+
+    }
+
+    @Override
+    public void validateGymOwner(String gymOwnerId, int isApproved) {
 
     }
 }

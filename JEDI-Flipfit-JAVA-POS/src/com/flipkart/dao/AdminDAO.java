@@ -1,14 +1,16 @@
 package com.flipkart.dao;
 
+import com.flipkart.bean.GymOwner;
 import com.flipkart.bean.Gymnasium;
-import com.flipkart.bean.Gym_Owner;
+
 import java.util.List;
-public class AdminDAO implements com.flipkart.dao.AdminInterfaceDAO {
 
-    private static GymOwnerInterfaceDAO gymOwnerDAO = new gymOwnerDAO();
-    private static  GymOwnerInterfaceDAO = new GymCentreDAO();
+public class AdminDAO implements AdminInterfaceDAO {
 
-    public List<Gym_Owner> getPendingGymOwners() {
+    private static GymOwnerInterfaceDAO gymOwnerDAO = new GymOwnerDAO();
+    private static GymCentreInterfaceDAO gymCentreDAO = new GymCentreDAO();
+
+    public List<GymOwner> getPendingGymOwners() {
         return gymOwnerDAO.getPendingGymOwnerList();
     }
 
@@ -17,10 +19,11 @@ public class AdminDAO implements com.flipkart.dao.AdminInterfaceDAO {
     }
 
     public void validateGymCentre(String gymCentreId, int isApproved) {
+        gymCentreDAO.validateGymCentre(gymCentreId,isApproved);
     }
 
     public List<Gymnasium> getPendingGymCentres() {
-        return GymCentreDAO.getPendingGymCentreList();
+        return gymCentreDAO.getPendingGymCentreList();
     }
 
 }

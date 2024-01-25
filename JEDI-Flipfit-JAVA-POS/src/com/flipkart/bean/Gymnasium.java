@@ -8,6 +8,16 @@ public class Gymnasium
     private ArrayList<Integer> slotAvailable;
     private int capacity;
     private String name; // Name of the gymnasium.
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    private String city;
     private String address; // Address of the gymnasium.
     private double totalArea; // Total area of the gymnasium.
     private int numItem; // Number of items in the gymnasium.

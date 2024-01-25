@@ -32,18 +32,5 @@ public class BookingDAO {
 
         return allUserPlan;
     }
-        
-
-
-    public void cancelBookingById(String Object bookingID = null;
-        bookingID) {
-       
-    }
-
-    public Slots getBookingByBookingId(String Object bookingId;
-        bookingId){
-            Slots booking  = null;
-       
-        return booking;
-    }
-}
+        return allUserPlan;
+    }}

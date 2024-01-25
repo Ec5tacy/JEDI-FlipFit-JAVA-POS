@@ -1,6 +1,6 @@
 package com.flipkart.dao;
 
-import com.flipkart.bean.Gym_Owner;
+import com.flipkart.bean.GymOwner;
 import com.flipkart.bean.Gymnasium;
 
 import java.util.List;
@@ -16,7 +16,7 @@ public interface AdminInterfaceDAO {
      *
      * @return List of pending Gym Owners
      */
-    List<Gym_Owner> getPendingGymOwners();
+    List<GymOwner> getPendingGymOwners();
 
     /**
      * Validates a Gym Owner based on the provided ID and approval status.

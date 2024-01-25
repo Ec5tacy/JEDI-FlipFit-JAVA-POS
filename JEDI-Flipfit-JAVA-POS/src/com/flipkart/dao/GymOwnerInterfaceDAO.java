@@ -1,18 +1,18 @@
 package com.flipkart.dao;
 
-import com.flipkart.bean.Gym_Owner;
+import com.flipkart.bean.GymOwner;
 
 import java.util.List;
 
 public interface GymOwnerInterfaceDAO {
 
-    List<Gym_Owner> getGymOwnerList();
+    List<GymOwner> getGymOwnerList();
 
-    void setGymOwnerList(List<Gym_Owner> gymOwnerList);
+    void setGymOwnerList(List<GymOwner> gymOwnerList);
 
-    void registerGymOwner(Gym_Owner gymOwner);
+    void registerGymOwner(GymOwner gymOwner);
 
-    List<Gym_Owner> getPendingGymOwnerList();
+    List<GymOwner> getPendingGymOwnerList();
 
     void sendOwnerApprovalRequest(String gymOwnerId);
 

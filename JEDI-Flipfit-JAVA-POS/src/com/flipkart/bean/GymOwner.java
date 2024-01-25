@@ -1,6 +1,6 @@
 package com.flipkart.bean;
 
-public class Gym_Owner {
+public class GymOwner {
     private int ownerId;
     private String ownerName;
     private String ownerEmailAddress;
