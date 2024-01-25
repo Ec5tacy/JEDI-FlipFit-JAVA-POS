@@ -67,7 +67,7 @@ public class GymOwnerFlipFitService implements GymOwnerFlipFitServiceInterface {
 				break;
 			}
 		}
-		System.out.println("We could not find your profile, please retry!");
+//		System.out.println("We could not find your profile, please retry!");
 	}
 	/**
 	 * This method allows a gym owner to add details of a particular gym.
@@ -95,7 +95,7 @@ public class GymOwnerFlipFitService implements GymOwnerFlipFitServiceInterface {
 				break;
 			}
 		}
-		System.out.println("We could not find the gym with the ID provided, please retry!");
+//		System.out.println("We could not find the gym with the ID provided, please retry!");
 	}
 	/**
 	 * Obtains all the gyms that owned by the given gym owner.

@@ -17,6 +17,10 @@ public class Booking {
 	private Date date;
 	private String customerEmail;
 	private String trainer;
+	private String customerId;
+	private String slotDate;
+	private String slotTime;
+
 
 	public Booking() {
 		super();

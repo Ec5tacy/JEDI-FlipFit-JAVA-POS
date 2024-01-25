@@ -4,6 +4,7 @@
 package com.flipkart.service;
 import java.util.*;
 
+import com.flipkart.bean.Administrator;
 import com.flipkart.bean.Gym;
 import com.flipkart.bean.GymOwner;
 
@@ -11,12 +12,17 @@ import com.flipkart.bean.GymOwner;
  * This class gives the Gym Management System's admin operations capabilities by implementing the AdminGMSInterface.
  */
 public class AdminFlipFitService implements AdminFlipFitServiceInterface {
+	List<Administrator> gymAdmin = new ArrayList<>();
+	Administrator admin1 = new Administrator("gymadmin1@gmail.com", "ga1", "Admin", "Aashna", "0000");
+	Administrator admin2 = new Administrator("gymadmin2@gmail.com", "ga2", "Admin", "Anjali", "0000");
+
 	List<GymOwner> gymOwners = new ArrayList<>();
 	GymOwner gymOwner1 = new GymOwner("gymowner1@gmail.com", "go1", "GymOwner", "Rakesh", "0000", "0000", "0000");
 	GymOwner gymOwner2 = new GymOwner("gymowner2@gmail.com", "go2", "GymOwner", "Ramesh", "0000", "0000", "0000");
 	GymOwner gymOwner3 = new GymOwner("gymowner3@gmail.com", "go3", "GymOwner", "Rajesh", "0000", "0000", "0000");
 	GymOwner gymOwner4 = new GymOwner("gymowner4@gmail.com", "go4", "GymOwner", "Rameshwari", "0000", "0000", "0000");
-	
+
+
 	List<Gym> gyms = new ArrayList<>();
 	Gym gym1 = new Gym("g1", "gym1", "gymowner1@gmail.com", "Kanpur", 2, 5, true);
 	Gym gym2 = new Gym("g2", "gym2", "gymowner2@gmail.com", "Hyderabad", 3, 5, false);
@@ -24,10 +30,14 @@ public class AdminFlipFitService implements AdminFlipFitServiceInterface {
 	Gym gym4 = new Gym("g4", "gym4", "gymowner4@gmail.com", "Cochin", 6, 5, true);
 	
 	public AdminFlipFitService() {
+		gymAdmin.add(admin1);
+		gymAdmin.add(admin2);
+
 		gymOwners.add(gymOwner1);
 		gymOwners.add(gymOwner2);
 		gymOwners.add(gymOwner3);
 		gymOwners.add(gymOwner4);
+
 		
 		gyms.add(gym1);
 		gyms.add(gym2);

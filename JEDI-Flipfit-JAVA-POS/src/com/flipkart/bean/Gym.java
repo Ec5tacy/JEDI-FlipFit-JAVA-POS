@@ -3,11 +3,15 @@
  */
 package com.flipkart.bean;
 
+import java.util.ArrayList;
+
 /**
  * 
  */
 public class Gym {
 	private String gymId;
+	private String ownerId;
+	private ArrayList<Integer> slotAvailable;
 	private String gymName;
 	private String ownerEmail;
 	private String address;

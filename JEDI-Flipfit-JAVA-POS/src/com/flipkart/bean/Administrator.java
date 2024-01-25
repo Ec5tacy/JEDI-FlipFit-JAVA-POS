@@ -8,6 +8,9 @@ package com.flipkart.bean;
  */
 public class Administrator extends User {
 	private String name;
+	private String id;
+	private String email;
+	private String phone;
 	private String phoneNumber;
 	
 	public Administrator(String email, String password, String roleName, String name, String phoneNumber) {

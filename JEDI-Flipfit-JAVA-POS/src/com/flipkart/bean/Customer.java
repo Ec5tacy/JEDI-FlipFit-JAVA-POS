@@ -7,7 +7,11 @@ package com.flipkart.bean;
  * 
  */
 public class Customer extends User {
+
 	private String name;
+	private String id;
+	private String email;
+	private String password;
 	private String phoneNumber;
 	private int age;
 	private String address;
