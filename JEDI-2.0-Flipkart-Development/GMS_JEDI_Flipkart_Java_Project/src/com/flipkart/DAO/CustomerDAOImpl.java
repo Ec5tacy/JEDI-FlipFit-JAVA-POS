@@ -8,20 +8,22 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import com.flipkart.bean.Gym;
+import com.flipkart.bean.*;
+import com.flipkart.constants.SQLConstants;
 import com.flipkart.exception.*;
 import com.flipkart.utils.DBUtils;
 
-public class CustomerDAOImpl implements CustomerDAO{
+public class CustomerDAOImpl implements CustomerDAO {
 
-	public List<Gym> fetchGymList() {
+	// returns the list of all the gyms
+	public List<Gym> fetchGymList(String city) {
 		Connection connection = null;
 		List<Gym> gyms = new ArrayList<Gym>();
-		String query = "select gymId, gymName, ownerEmail, address, slotCount, seatsPerSlotCount, isVerified from gym";
 		try {connection = DBUtils.getConnection();
-				// Step 2:Create a statement using connection object
-				PreparedStatement statement = connection.prepareStatement(query);
-			System.out.println(statement);
+			// Step 2:Create a statement using connection object
+			PreparedStatement statement = connection.prepareStatement(SQLConstants.SQL_SELECT_ALL_GYMS_BY_ADDRESS);
+			statement.setString(1, city);
+			//System.out.println(statement);
 			// Step 3: Execute the query or update query
 			ResultSet rs = statement.executeQuery();
 
@@ -36,170 +38,263 @@ public class CustomerDAOImpl implements CustomerDAO{
 				gym.setSeatsPerSlotCount(rs.getInt("seatsPerSlotCount"));
 				gym.setVerified(rs.getBoolean("isVerified"));
 				gyms.add(gym);
-//	                System.out.println(id + "," + name + "," + email + "," + country + "," + password);
+//                    System.out.println(id + "," + name + "," + email + "," + country + "," + password);
 			}
 		} catch (SQLException e) {
-			printSQLException(e);
+//            printSQLException(e);
 		}
 		return gyms;
 	}
 
-	public void fetchSlotList(int gymId) throws NoSlotsFoundException {
+
+	// shows all the slots in the provided gym
+	public List<Slot> fetchSlotList(String gymId) throws SlotNotFoundException {
 		Connection connection = null;
-		String query = "Select * From Slot Where gymId=?";
+		List<Slot> slots=new ArrayList<>();
 		try {connection = DBUtils.getConnection();
-		PreparedStatement statement = connection.prepareStatement(query);
-			System.out.println(statement);
-			statement.setInt(1, gymId);
-			ResultSet output = statement.executeQuery();
-			if (!output.next()) {
-				throw new NoSlotsFoundException("No slot found");
+			PreparedStatement statement = connection.prepareStatement(SQLConstants.SQL_FETCH_SLOT_LIST);
+			//System.out.println(statement);
+			statement.setString(1, gymId);
+			//executing the query
+			ResultSet rs = statement.executeQuery();
+			while(rs.next())
+			{
+				Slot s=new Slot();
+				s.setSlotId(rs.getString("slotId"));
+				s.setTrainer(rs.getString("trainer"));
+				s.setGymId(rs.getString("gymId"));
+				s.setNumOfSeatsBooked(rs.getInt("numOfSeatsBooked"));
+				s.setNumOfSeats(rs.getInt("numOfSeats"));
+				s.setStartTime(rs.getString("startTime"));
+				s.setEndTime(rs.getString("endTime"));
+				slots.add(s);
 			}
-			System.out.println("SlotId \t Capacity \t SlotTime \t GymId");
-			do {
-				System.out.printf("%-7s\t", output.getString(1));
-				System.out.printf("  %-9s\t", output.getString(2));
-				System.out.printf("  %-9s\t", output.getString(3));
-				System.out.printf("  %-9s\t", output.getString(4));
-				System.out.println("");
-			} while (output.next());
-			System.out.println("-----------------------------------------------");
+
 		} catch (SQLException sqlExcep) {
-			printSQLException(sqlExcep);
+			//printSQLException(sqlExcep);
 		}
+		return slots;
+	}
+	// shows all the bookings of the slots made by the customer
+	public List<Booking> fetchBookedSlots(String email) {
+		Connection connection = null;
+		List<Booking> bookings=new ArrayList<>();
+		try {
+			connection = DBUtils.getConnection();
+			PreparedStatement statement = connection.prepareStatement(SQLConstants.SQL_SELECT_BOOKED_SLOTS_BY_CUSTOMER);
+			statement.setString(1, email);
+			ResultSet rs = statement.executeQuery();
+			while (rs.next()) {
+				Booking b=new Booking();
+				b.setBookingId(rs.getString("bookingId"));
+				b.setCustomerEmail(rs.getString("customerEmail"));
+				b.setSlotId(rs.getString("slotId"));
+				b.setGymId(rs.getString("gymId"));
+				b.setType(rs.getString("type"));
+				b.setDate(rs.getString("date"));
+				bookings.add(b);
+			}
+		} catch (SQLException sqlExcep) {
+//            printSQLException(sqlExcep);
+		}
+		return bookings;
 	}
 
-	public void fetchBookedSlots(String email) {
+	// books the slot with the given slotId for the customer
+	public void bookSlots(String bookingId, String slotId, String gymId, String type, String date, String customerEmail) {
 		Connection connection = null;
-		String query = "Select * From Booking where customerEmail = ?";
-		try {connection = DBUtils.getConnection();
-			PreparedStatement statement = connection.prepareStatement(query);
-		
-			statement.setString(1, email);
-			ResultSet output = statement.executeQuery();
-			System.out.println("BookingId \t Date \t    GymId");
-			while (output.next()) {
-				System.out.printf("%-12s\t", output.getInt(1));
-				System.out.printf("  %-7s\t", output.getString(5));
-				System.out.printf("%-8s\t", output.getString(3));
-				System.out.println("");
-			}
-			System.out.println("-----------------------------------------------");
-		} catch (SQLException sqlExcep) {
-			printSQLException(sqlExcep);
-		}
-	}
-	
-	public void bookSlots(String bookingId, String slotId, String gymId, String type, Date date, String customerEmail) {
-		Connection connection = null;
-		String query = "INSERT INTO Booking (bookingId,slotId,gymId,type,date,customerEmail) values(?, ?, ?, ?, ?, ?)";
-		try {connection = DBUtils.getConnection();
-		PreparedStatement statement = connection.prepareStatement(query);
+		try {
+			connection = DBUtils.getConnection();
+			PreparedStatement statement = connection.prepareStatement(SQLConstants.SQL_INSERT_BOOKING);
 			statement.setString(1, bookingId);
 			statement.setString(2, slotId);
 			statement.setString(3, gymId);
 			statement.setString(4, type);
-			statement.setDate(5, (java.sql.Date)date);
+			statement.setString(5, date);
 			statement.setString(6, customerEmail);
 			statement.executeUpdate();
-			System.out.println("-----------------------------------------------");
 		} catch (SQLException sqlExcep) {
-			printSQLException(sqlExcep);
+//            printSQLException(sqlExcep);
 		}
 	}
 
+	// returns true if the slot is fully booked
 	public boolean isFull(String slotId, String date) {
 		Connection connection = null;
-		String query = "Select * slot where slotId=? and (numOfSeatsBooked>=numOfSeats)";
-		try {connection = DBUtils.getConnection(); 
-		PreparedStatement preparedStatement = connection.prepareStatement(query);
-
+		try {
+			connection = DBUtils.getConnection();
+			PreparedStatement preparedStatement = connection.prepareStatement(SQLConstants.SQL_CHECK_FULL_SLOT);
 			preparedStatement.setString(1, slotId);
-			System.out.println(preparedStatement);
-
 			ResultSet rs = preparedStatement.executeQuery();
-			return rs.next();
-		} catch (SQLException e)
-		{
-			printSQLException(e);
-		}
-
-		return false;
-	}
-
-	public boolean alreadyBooked(String slotId, String email, String date) {
-		Connection connection = null;
-		String query = "select isVerified from Booking where slotId=? and customerEmail =  ?";
-		try {connection = DBUtils.getConnection();
-
-				PreparedStatement preparedStatement = connection.prepareStatement(query);
-			preparedStatement.setString(1, slotId);
-			preparedStatement.setString(2, email);
-			System.out.println(preparedStatement);
-
-			ResultSet rs = preparedStatement.executeQuery();
-
 			return rs.next();
 		} catch (SQLException e) {
-			printSQLException(e);
+//            printSQLException(e);
 		}
-
 		return false;
 	}
 
-	public void cancelBooking(String slotId, String email, String date) {
+	// checks if the slot is already booked by the customer
+	public boolean alreadyBooked(String slotId, String email, String date) {
 		Connection connection = null;
-		String query = "Delete from Booking where email = ? and slotId = ? and date = ?";
-		try {connection = DBUtils.getConnection(); PreparedStatement statement = connection.prepareStatement(query);
-			statement.setString(1, email);
-			statement.setString(2, slotId);
-			statement.setString(3, date);
-			statement.executeUpdate();
-			System.out.println("-----------------------------------------------");
-		} catch (SQLException sqlExcep) {
-			printSQLException(sqlExcep);
+		try {
+			connection = DBUtils.getConnection();
+			PreparedStatement preparedStatement = connection.prepareStatement(SQLConstants.SQL_CHECK_ALREADY_BOOKED);
+			preparedStatement.setString(1, slotId);
+			preparedStatement.setString(2, email);
+			ResultSet rs = preparedStatement.executeQuery();
+			return rs.next();
+		} catch (SQLException e) {
+//            printSQLException(e);
 		}
+		return false;
 	}
 
+	public int getNumberOfSeatsBooked(String slotId)
+	{
+		Connection connection = null;
+
+		try {
+			connection = DBUtils.getConnection();
+			PreparedStatement preparedStatement = connection.prepareStatement(SQLConstants.SQL_GET_NUMBER_OF_BOOKED_SEATS);
+			preparedStatement.setString(1, slotId);
+			ResultSet rs =  preparedStatement.executeQuery();
+			while (rs.next()) {
+				return rs.getInt("numOfSeatsBooked");
+			}
+
+		}
+		catch (SQLException sqlExcep) {
+//            printSQLException(sqlExcep);
+		}
+		return 0;
+	}
+	public int getNumberOfSeats(String slotId)
+	{
+		Connection connection = null;
+
+		try {
+			connection = DBUtils.getConnection();
+			PreparedStatement preparedStatement = connection.prepareStatement(SQLConstants.SQL_GET_NUMBER_OF_SEATS);
+			preparedStatement.setString(1, slotId);
+			ResultSet rs =  preparedStatement.executeQuery();
+			while (rs.next()) {
+				return rs.getInt("numOfSeats");
+			}
+
+		}
+		catch (SQLException sqlExcep) {
+//            printSQLException(sqlExcep);
+		}
+		return 0;
+	}
+	public boolean updateNumOfSeats(String slotId, int seats)
+	{
+		Connection connection = null;
+		try {
+			connection = DBUtils.getConnection();
+			PreparedStatement preparedStatement = connection.prepareStatement(SQLConstants.SQL_UPDATE_NUMBER_OF_BOOKED_SEATS);
+			preparedStatement.setString(2, slotId);
+			preparedStatement.setInt(1, seats);
+			preparedStatement.executeUpdate();
+			return true;
+		}
+		catch (SQLException sqlExcep) {
+//            printSQLException(sqlExcep);
+		}
+		return false;
+	}
+	// cancels the booking of the customer made earlier
+	public boolean cancelBooking(String bookingId, String email) {
+		Connection connection = null;
+		try {
+			connection = DBUtils.getConnection();
+			PreparedStatement statement = connection.prepareStatement(SQLConstants.SQL_DELETE_BOOKING);
+			statement.setString(2, bookingId);
+			statement.setString(1, email);
+			statement.executeUpdate();
+			return true;
+		} catch (SQLException sqlExcep) {
+//            printSQLException(sqlExcep);
+		}
+		return false;
+	}
+
+	// checks if the slot exists or not
 	public boolean checkSlotExists(String slotId, String gymId) {
 		Connection connection = null;
-		String query = "select isVerified from slot where slotId=? and gymId =  ?";
-		try {connection = DBUtils.getConnection();
-
-				PreparedStatement preparedStatement = connection.prepareStatement(query);
+		try {
+			connection = DBUtils.getConnection();
+			PreparedStatement preparedStatement = connection.prepareStatement(SQLConstants.SQL_CHECK_SLOT_EXISTS);
 			preparedStatement.setString(1, slotId);
 			preparedStatement.setString(2, gymId);
 			System.out.println(preparedStatement);
-
 			ResultSet rs = preparedStatement.executeQuery();
-
 			return rs.next();
 		} catch (SQLException e) {
-			printSQLException(e);
+//            printSQLException(e);
 		}
-
 		return false;
 	}
 
+	// checks if the gym is approved
 	public boolean checkGymApprove(String gymId) {
 		Connection connection = null;
-		String query = "select isVerified from gym where gymId =  ?";
-		try {connection = DBUtils.getConnection();
-
-				PreparedStatement preparedStatement = connection.prepareStatement(query);
+		try {
+			connection = DBUtils.getConnection();
+			PreparedStatement preparedStatement = connection.prepareStatement(SQLConstants.SQL_CHECK_GYM_APPROVAL);
 			preparedStatement.setString(1, gymId);
 			System.out.println(preparedStatement);
-
 			ResultSet rs = preparedStatement.executeQuery();
-
 			return rs.next();
 		} catch (SQLException e) {
-			printSQLException(e);
+//            printSQLException(e);
 		}
-
 		return false;
 	}
+	public Customer getProfile(Customer customer)
+	{
+		return customer;
+	}
 
+	public int editCustomerDetails(Customer customer) {
+		Connection connection = null;
+		try {
+			connection = DBUtils.getConnection();
+
+			// Step 2:Create a statement using connection object
+			PreparedStatement preparedStatement = connection.prepareStatement(SQLConstants.SQL_UPDATE_USER);
+			preparedStatement.setString(1, customer.getEmail());
+			preparedStatement.setString(2, customer.getPassword());
+			preparedStatement.setString(3, "customer");
+			preparedStatement.setString(4, customer.getEmail());
+			// Step 3: Execute the query or update query
+			preparedStatement.executeUpdate();
+		} catch (SQLException e) {
+			// print SQL exception information
+//            printSQLException(e);
+		}
+		try {
+			connection = DBUtils.getConnection();
+
+			// Step 2:Create a statement using connection object
+			PreparedStatement preparedStatement = connection.prepareStatement(SQLConstants.SQL_UPDATE_CUSTOMER);
+			preparedStatement.setString(1, customer.getName());
+			preparedStatement.setString(2, customer.getPhoneNumber());
+			preparedStatement.setInt(3,customer.getAge());
+			preparedStatement.setString(4, customer.getAddress());
+			preparedStatement.setString(5, customer.getEmail());
+			// Step 3: Execute the query or update query
+			return  preparedStatement.executeUpdate();
+		} catch (SQLException e) {
+			// print SQL exception information
+//            printSQLException(e);
+		}
+
+		System.out.println(SQLConstants.SQL_UPDATE_CUSTOMER);
+		// Step 1: Establishing a Connection
+		return 0;
+	}
+	// prints the SQL Exception
 	public static void printSQLException(SQLException ex) {
 		for (Throwable e : ex) {
 			if (e instanceof SQLException) {
@@ -215,5 +310,4 @@ public class CustomerDAOImpl implements CustomerDAO{
 			}
 		}
 	}
-
 }

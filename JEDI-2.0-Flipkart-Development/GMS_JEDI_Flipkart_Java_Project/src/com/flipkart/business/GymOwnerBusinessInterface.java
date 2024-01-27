@@ -1,14 +1,17 @@
 package com.flipkart.business;
 
 import com.flipkart.bean.*;
+import com.flipkart.exception.GymNotFoundException;
+import com.flipkart.exception.GymOwnerNotFoundException;
+
 import java.util.*;
 
 public interface GymOwnerBusinessInterface{
-    public GymOwner getProfile(String email);
+    public GymOwner getProfile(String email) throws GymOwnerNotFoundException;
     /*
   returns the gym owner's profile
     */
-    public void editProfile(GymOwner gymOwnerNews);
+    public void editProfile(GymOwner gymOwnerNews) throws GymOwnerNotFoundException;
     /*
 allows the gym owner to edit profile
      */
@@ -18,7 +21,7 @@ allows the gym owner to edit profile
 allows the gym owner to add new gym
      */
 
-    public void editGym(Gym gym);
+    public void editGym(Gym gym) throws GymNotFoundException;
     /*
 allows the gym owner to edit the gym information
      */

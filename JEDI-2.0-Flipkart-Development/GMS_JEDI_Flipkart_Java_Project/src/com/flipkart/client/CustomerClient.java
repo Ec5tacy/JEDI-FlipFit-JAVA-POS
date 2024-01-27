@@ -9,6 +9,7 @@ import com.flipkart.bean.Gym;
 import com.flipkart.bean.Slot;
 import com.flipkart.business.CustomerBusiness;
 import com.flipkart.business.UserBusiness;
+import com.flipkart.exception.SlotNotFoundException;
 
 public class CustomerClient {
 
@@ -36,7 +37,7 @@ public class CustomerClient {
 
 	}
 
-	public void viewGyms(String email) throws ParseException {
+	public void viewGyms(String email) throws ParseException, SlotNotFoundException {
 		getGyms();
 		System.out.print("Enter gym ID: ");
 		String gymId = sc.next();
@@ -48,11 +49,11 @@ public class CustomerClient {
 		List<Slot> slots = customerBusiness.getSlotInGym(gymId);
 		for (Slot slot : slots) {
 			System.out.print("Slot Id: " + slot.getSlotId());
-			System.out.print("Availability: " + customerBusiness.isSlotBooked(slot.getSlotId(), date));
+			System.out.print("Availability: " + customerBusiness.isSlotBooked(slot.getSlotId(), String.valueOf(date)));
 		}
 		System.out.print("Enter the slot ID which you want to book: ");
 		String slotId = sc.next();
-		int bookingResponse = customerBusiness.bookSlot(gymId,slotId, email, date);
+		int bookingResponse = customerBusiness.bookSlot(gymId,slotId, email, String.valueOf(date));
 		switch (bookingResponse) {
 		case 0:
 			System.out.println("You have already booked this time. Cancelling the previous one and booking this slot");
@@ -102,7 +103,7 @@ public class CustomerClient {
 		customerBusiness.cancelBooking(bookingId, email);
 	}
 
-	public void customerMenu(String email) throws ParseException {
+	public void customerMenu(String email) throws ParseException, SlotNotFoundException {
 		int choice = 0;
 
 		while (choice != 5) {

@@ -6,19 +6,53 @@ import com.flipkart.bean.Gym;
 import com.flipkart.bean.GymOwner;
 
 public interface AdminDAO {
+	/**
+	 * Retrieves a list of all gym owners from database
+	 * @return List of GymOwner objects
+	 */
 	public List<GymOwner> getAllGymOwners();
 
+	/**
+	 * Retrieves a list of all gyms from database
+	 * @return List of Gym objects
+	 */
 	public List<Gym> getAllGyms();
 
+	/**
+	 * Retrieves a list of all pending gym owner requests from database
+	 * @return List of GymOwner objects
+	 */
 	public List<GymOwner> getPendingGymOwnerRequests();
 
+	/**
+	 * Retrieves a list of all pending gym requests from database
+	 * @return List of Gym objects
+	 */
 	public List<Gym> getPendingGymRequests();
 
-	public void approveSingleOwnerRequest(String gymOwnerEmail);
+	/**
+	 * Approves a single gym owner request
+	 * @param gymOwnerEmail The Email of the gym owner
+	 * @return
+	 */
+	public int approveSingleOwnerRequest(String gymOwnerEmail);
 
-	public void approveAllOwnerRequest();
+	/**
+	 * Approves all pending gym owner requests
+	 * @return
+	 */
+	public int approveAllOwnerRequest();
 
-	public void approveSingleGymRequest(String gymId);
+	/**
+	 * Approves a single gym request
+	 * @param gymId The Id of the gym
+	 * @return
+	 */
+	public int approveSingleGymRequest(String gymId);
 
-	public void approveAllGymRequest();
+	/**
+	 * Approves all pending gym requests
+	 * @return
+	 */
+	public int approveAllGymRequest();
 }

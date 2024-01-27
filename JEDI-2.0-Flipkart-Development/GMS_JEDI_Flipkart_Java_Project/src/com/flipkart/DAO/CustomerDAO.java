@@ -3,25 +3,35 @@ package com.flipkart.DAO;
 import java.util.Date;
 import java.util.List;
 
+import com.flipkart.bean.Booking;
+import com.flipkart.bean.Customer;
 import com.flipkart.bean.Gym;
-import com.flipkart.exception.NoSlotsFoundException;
+import com.flipkart.bean.Slot;
+import com.flipkart.exception.*;
 
 public interface CustomerDAO {
-	public List<Gym> fetchGymList();
+	public Customer getProfile(Customer customer);
 
-	public void fetchSlotList(int gymId) throws NoSlotsFoundException;
+	public int editCustomerDetails(Customer customer);
+	public List<Gym> fetchGymList(String city);
 
-	public void fetchBookedSlots(String email);
+	public List<Slot> fetchSlotList(String gymId) throws SlotNotFoundException;
 
-	public void bookSlots(String bookingId, String slotId, String gymId, String type, Date date, String customerEmail);
+	public List<Booking> fetchBookedSlots(String email);
+
+	public void bookSlots(String bookingId, String slotId, String gymId, String type, String date, String customerEmail);
 
 	public boolean isFull(String slotId, String date);
 
 	public boolean alreadyBooked(String slotId, String email, String date);
 
-	public void cancelBooking(String slotId, String email, String date);
+	public boolean cancelBooking(String bookingId, String email);
 
 	public boolean checkSlotExists(String slotId, String gymId);
 
 	public boolean checkGymApprove(String gymId);
+
+	public int getNumberOfSeatsBooked(String slotId);
+
+	public int getNumberOfSeats(String slotId);
 }
