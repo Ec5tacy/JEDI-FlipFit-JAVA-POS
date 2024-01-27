@@ -52,7 +52,7 @@ public class UserDAOImpl implements UserDAO {
 			preparedStatement.setString(2, customer.getName());
 			preparedStatement.setString(3, customer.getPhoneNumber());
 			preparedStatement.setInt(4, customer.getAge());
-			preparedStatement.setString(1, customer.getAddress());
+			preparedStatement.setString(5, customer.getAddress());
 
 			int rowsAffected = preparedStatement.executeUpdate();
 			if (rowsAffected != 0)
