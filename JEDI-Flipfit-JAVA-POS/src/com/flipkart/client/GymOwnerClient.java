@@ -59,6 +59,7 @@ public class GymOwnerClient {
         System.out.println();
         System.out.printf("%15s%15s%15s%15s", gymOwner.getName(), gymOwner.getPhoneNumber(),
                 gymOwner.getPanNumber(), gymOwner.getAadharNumber());
+        System.out.println();
         System.out.println("______________________________________________________________");
 
     }
@@ -106,6 +107,13 @@ public class GymOwnerClient {
         List<Gym> gymDetails = gymOwnerFlipFitService.getGymDetail(email);
         for (Gym gym : gymDetails) {
             System.out.println(gym);
+            System.out.println("____________________________________________________________________________________________");
+            System.out.printf("%15s%15s%15s%15s%15s%15s%15s", "Gym Id", "Gym Name", "Gym Owner Email", "Gym Address", "Gym Slot Count", "Seats per slot", "Verification Status");
+            System.out.println();
+            System.out.printf("%15s%15s%15s%15s%15s%15s%15s", gym.getGymId(), gym.getGymName(),
+                    gym.getOwnerEmail(), gym.getAddress(), gym.getSlotCount(), gym.getSeatsPerSlotCount(), gym.isVerified()?"Yes":"No");
+            System.out.println();
+            System.out.println("____________________________________________________________________________________________");
         }
     }
 

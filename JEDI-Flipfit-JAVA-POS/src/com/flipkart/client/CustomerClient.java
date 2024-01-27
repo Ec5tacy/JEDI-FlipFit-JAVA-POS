@@ -38,12 +38,13 @@ public class CustomerClient {
 
 	public void viewProfile(Scanner in, String email) {
 		customer = customerFlipFitService.getProfile(email);
-		System.out.println("______________________________________________________________");
-		System.out.printf("%15s%15s%15s%15s", "Customer Name", "Phone Number", "Address", "Age");
+		System.out.println("________________________________________________________________________________");
+		System.out.printf("%15s%15s%15s%15s%15s", "Customer Name", "Phone Number", "Address", "Age", "Email");
 		System.out.println();
-		System.out.printf("%15s%15s%15s%15s", customer.getName(), customer.getPhoneNumber(),
+		System.out.printf("%15s%15s%15s%15s%15s", customer.getName(), customer.getPhoneNumber(),
 				customer.getAddress(), customer.getAge(), customer.getEmail());
-		System.out.println("______________________________________________________________");
+		System.out.println();
+		System.out.println("________________________________________________________________________________");
 
 	}
 
@@ -116,9 +117,9 @@ public class CustomerClient {
 	public void customerMenu(Scanner in,String email) throws ParseException {
 		int choice = 0;
 
-		while (choice != 5) {
+		while (choice != 6) {
 			System.out.println("Menu:-");
-			System.out.println("1.View Gyms \n2.View Booked Slots \n3.Cancel Booked Slots \n4. Edit Profile \n5.View Profile \n6.Exit");
+			System.out.println("1. View Gyms \n2. View Booked Slots \n3. Cancel Booked Slots \n4. Edit Profile \n5. View Profile \n6. Exit");
 			System.out.print("Enter your choice: ");
 			choice = sc.nextInt();
 
