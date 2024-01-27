@@ -1,8 +1,10 @@
-package com.flipkart.exception; 
+package com.flipkart.exception;
 
 public class UserNotFoundException extends Exception {
-    public UserNotFoundException(String message){
-        super(message);
+    @Override
+    public String getMessage(){
+        return "Wrong credentials entered! Please recheck!";
     }
 }
+
 

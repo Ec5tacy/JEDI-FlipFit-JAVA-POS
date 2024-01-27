@@ -50,6 +50,7 @@ public class UserDAOImpl implements UserDAO {
 			preparedStatementUser.setString(1, customer.getEmail());
 			preparedStatementUser.setString(2, customer.getPassword());
 			preparedStatementUser.setString(3, "Customer");
+//			System.out.println("------------"+ customer.getEmail()+"_________"+customer.getPassword()+"---------"+customer.getRoleId());
 
 			int rowsAffected = preparedStatementUser.executeUpdate();
 			if (rowsAffected != 0)
@@ -86,6 +87,8 @@ public class UserDAOImpl implements UserDAO {
 			preparedStatementOwner.setString(1, gymOwner.getEmail());
 			preparedStatementOwner.setString(2, gymOwner.getPassword());
 			preparedStatementOwner.setString(3, "GymOwner");
+//			System.out.println("------------"+ gymOwner.getEmail()+"_________"+gymOwner.getPassword()+"---------"+gymOwner.getRoleId());
+
 
 			int rowsAffected = preparedStatementOwner.executeUpdate();
 			if (rowsAffected != 0)

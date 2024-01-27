@@ -23,7 +23,7 @@ public class GymOwnerClient {
 	GymOwnerBusiness gymOwnerBusiness = new GymOwnerBusiness();
 	UserBusiness userBusiness = new UserBusiness();
 
-	public void gymOwnerRegistration(Scanner in) {
+	public void gymOwnerRegistration(Scanner in) throws UserAlreadyExistsException {
 		System.out.println("\nEnter GymOwner Details: \n");
 		System.out.print("Enter Email: ");
 		gymOwner.setEmail(in.next());

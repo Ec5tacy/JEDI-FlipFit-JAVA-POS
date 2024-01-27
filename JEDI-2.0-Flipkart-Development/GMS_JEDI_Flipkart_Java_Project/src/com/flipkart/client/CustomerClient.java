@@ -10,6 +10,7 @@ import com.flipkart.bean.Slot;
 import com.flipkart.business.CustomerBusiness;
 import com.flipkart.business.UserBusiness;
 import com.flipkart.exception.SlotNotFoundException;
+import com.flipkart.exception.UserAlreadyExistsException;
 
 public class CustomerClient {
 
@@ -17,11 +18,12 @@ public class CustomerClient {
 	CustomerBusiness customerBusiness = new CustomerBusiness();
 	Scanner sc = new Scanner(System.in);
 
-	public void registerCustomer() {
+	public void registerCustomer() throws UserAlreadyExistsException {
 		System.out.print("Enter email: ");
-		customer.setName(sc.next());
+		customer.setEmail(sc.next());
 		System.out.print("Enter password: ");
 		customer.setPassword(sc.next());
+		customer.setRoleId("Customer");
 		System.out.print("Enter Name: ");
 		customer.setName(sc.next());
 		System.out.print("Enter Phone Number: ");
@@ -55,20 +57,20 @@ public class CustomerClient {
 		String slotId = sc.next();
 		int bookingResponse = customerBusiness.bookSlot(gymId,slotId, email, String.valueOf(date));
 		switch (bookingResponse) {
-		case 0:
-			System.out.println("You have already booked this time. Cancelling the previous one and booking this slot");
-			break;
-		case 1:
-			System.out.println("Slot is already booked, added to the waiting list");
-			break;
-		case 2:
-			System.out.println("Successfully booked the slot");
-			break;
-		case 3:
-			System.out.println("Slot not found");
-			break;
-		default:
-			System.out.println("Booking failed");
+			case 0:
+				System.out.println("You have already booked this time. Cancelling the previous one and booking this slot");
+				break;
+			case 1:
+				System.out.println("Slot is already booked, added to the waiting list");
+				break;
+			case 2:
+				System.out.println("Successfully booked the slot");
+				break;
+			case 3:
+				System.out.println("Slot not found");
+				break;
+			default:
+				System.out.println("Booking failed");
 		}
 	}
 
@@ -113,22 +115,22 @@ public class CustomerClient {
 			choice = sc.nextInt();
 
 			switch (choice) {
-			case 1:
-				viewGyms(email);
-				break;
-			case 2:
-				customerBusiness.getBookings(email);
-				break;
-			case 3:
-				cancelBooking(email);
-				break;
-			case 4:
-				editProfile(email);
-				break;
-			case 5:
-				break;
-			default:
-				System.out.println("Invalid choice!");
+				case 1:
+					viewGyms(email);
+					break;
+				case 2:
+					customerBusiness.getBookings(email);
+					break;
+				case 3:
+					cancelBooking(email);
+					break;
+				case 4:
+					editProfile(email);
+					break;
+				case 5:
+					break;
+				default:
+					System.out.println("Invalid choice!");
 			}
 		}
 	}
