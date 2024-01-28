@@ -72,16 +72,36 @@ public class CustomerClient {
 	}
 
 	public void editProfile(String email) {
-		System.out.print("Enter password: ");
-		customer.setPassword(sc.next());
-		System.out.print("Enter Name: ");
-		customer.setName(sc.next());
-		System.out.print("Enter Phone Number: ");
-		customer.setPhoneNumber(sc.next());
-		System.out.print("Enter Age: ");
-		customer.setAge(Integer.valueOf(sc.next()));
-		System.out.print("Enter Address: ");
-		customer.setAddress(sc.next());
+		System.out.println("Want to change password? Yes/No");
+		String choice = sc.next();
+		if(choice.equals("Yes")){
+			System.out.print("Enter password: ");
+			customer.setPassword(sc.next());
+		}
+		System.out.println("Want to change name? Yes/No");
+		choice = sc.next();
+		if(choice.equals("Yes")) {
+			System.out.print("Enter Name: ");
+			customer.setName(sc.next());
+		}
+		System.out.println("Want to change phone number? Yes/No");
+		choice = sc.next();
+		if(choice.equals("Yes")) {
+			System.out.print("Enter Phone Number: ");
+			customer.setPhoneNumber(sc.next());
+		}
+		System.out.println("Want to change phone age? Yes/No");
+		choice = sc.next();
+		if(choice.equals("Yes")) {
+			System.out.print("Enter Age: ");
+			customer.setAge(Integer.valueOf(sc.next()));
+		}
+		System.out.println("Want to change phone address? Yes/No");
+		choice = sc.next();
+		if(choice.equals("Yes")) {
+			System.out.print("Enter Address: ");
+			customer.setAddress(sc.next());
+		}
 		System.out.println("Successfully edited your profile");
 	}
 
