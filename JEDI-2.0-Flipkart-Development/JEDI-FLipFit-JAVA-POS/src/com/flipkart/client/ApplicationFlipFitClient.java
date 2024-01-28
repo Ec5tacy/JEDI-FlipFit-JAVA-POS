@@ -11,6 +11,7 @@ public class ApplicationFlipFitClient {
 
 	public static void login() throws Exception {
 		Scanner in = new Scanner(System.in);
+
 		System.out.println("__________________________________________________________________________________\n");
 		System.out.println("Enter LogIn Details\n");
 		System.out.print("Enter Email: ");
@@ -60,9 +61,11 @@ public class ApplicationFlipFitClient {
 
 	public static void applicationMenu() throws Exception {
 		boolean recur = true;
-		System.out.println(ColorConstants.GREEN + "Welcome to the FlipFit Application!" + ColorConstants.RESET);
 
-		while (recur) {
+		int choice=0;
+		while (choice!=4) {
+			System.out.println(ColorConstants.GREEN + "Welcome to the FlipFit Application!" + ColorConstants.RESET);
+			System.out.println("_______________________________________");
 			System.out.println("\nChoose your action:");
 			System.out.println("1. Login");
 			System.out.println("2. Customer Registration");
@@ -72,7 +75,8 @@ public class ApplicationFlipFitClient {
 
 			Scanner in = new Scanner(System.in);
 
-			int choice = in.nextInt();
+			choice = in.nextInt();
+			in.nextLine();
 			switch (choice) {
 				case 1:
 					login();

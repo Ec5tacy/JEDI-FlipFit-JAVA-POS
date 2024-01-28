@@ -7,6 +7,8 @@ import java.util.*;
 import com.flipkart.bean.Customer;
 import com.flipkart.bean.Gym;
 import com.flipkart.bean.Slot;
+import com.flipkart.constants.ColorConstants;
+import com.flipkart.exception.GymOwnerNotFoundException;
 import com.flipkart.service.CustomerFlipFitServiceImpl;
 import com.flipkart.service.UserFlipFitServiceImpl;
 import com.flipkart.exception.SlotNotFoundException;
@@ -39,6 +41,23 @@ public class CustomerFlipFitClient {
 
 	}
 
+
+//	public void viewProfile(Scanner in, String email) {
+//		try {
+//			customer = CustomerFlipFitServiceImpl.getProfile(email);
+//		} catch (GymOwnerNotFoundException e) {
+//			// TODO Auto-generated catch block
+//			System.out.println(ColorConstants.RED + e.getMessage() + ColorConstants.RESET);
+//			return;
+//		}
+//		System.out.println("______________________________________________________________");
+//		System.out.printf("%15s%15s%15s%15s", "Gym Owner Name", "Phone Number", "PAN Number", "Aadhaar Number");
+//		System.out.println();
+//		System.out.printf("%15s%15s%15s%15s", gymOwner.getName(), gymOwner.getPhoneNumber(), gymOwner.getPanNumber(),
+//				gymOwner.getAadharNumber());
+//		System.out.println();
+//		System.out.println("\n______________________________________________________________");
+//	}
 	public void viewGyms(String email) throws ParseException, SlotNotFoundException {
 		getGyms();
 		System.out.print("Enter gym ID: ");
@@ -108,9 +127,9 @@ public class CustomerFlipFitClient {
 	public void customerMenu(String email) throws ParseException, SlotNotFoundException {
 		int choice = 0;
 
-		while (choice != 5) {
+		while (choice != 6) {
 			System.out.println("Menu:-");
-			System.out.println("1.View Gyms \n2.View Booked Slots \n3.Cancel Booked Slots \n4. Edit Profile \n5.Exit");
+			System.out.println("1.View Gyms \n2.View Booked Slots \n3.Cancel Booked Slots \n4.Edit Profile \n5.View Profile \n6.Exit");
 			System.out.print("Enter your choice: ");
 			choice = sc.nextInt();
 
@@ -128,6 +147,8 @@ public class CustomerFlipFitClient {
 					editProfile(email);
 					break;
 				case 5:
+//					viewProfile(email);
+				case 6:
 					break;
 				default:
 					System.out.println("Invalid choice!");
