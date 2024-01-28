@@ -23,7 +23,9 @@ public class CustomerFlipFitClient {
 	Scanner sc = new Scanner(System.in);
 
 	public void registerCustomer() throws UserAlreadyExistsException {
-		System.out.println("\nEnter GymOwner Details: \n");
+		System.out.println("==========================================");
+		System.out.println("            Customer Registration         ");
+		System.out.println("==========================================");
 		String email="",phoneNo="";
 		String regex = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$";
 		Pattern pattern = Pattern.compile(regex);
@@ -34,16 +36,16 @@ public class CustomerFlipFitClient {
 			m = pattern.matcher(email);
 		}
 		customer.setEmail(email);
-		System.out.print("Enter email: ");
+		System.out.print("Enter Email: ");
 		customer.setEmail(sc.next());
-		System.out.print("Enter password: ");
+		System.out.print("Enter Password: ");
 		customer.setPassword(sc.next());
 		customer.setRoleId("Customer");
 		System.out.print("Enter Name: ");
 		customer.setName(sc.next());
 		while(phoneNo.length()!=10){
 			if(!phoneNo.isEmpty())System.out.println("Invalid Phone number");
-			System.out.println("Enter phone number");
+			System.out.println("Enter Phone Number");
 			phoneNo = sc.next();
 		}
 		customer.setPhoneNumber(phoneNo);
@@ -77,7 +79,7 @@ public class CustomerFlipFitClient {
 //	}
 	public void viewGyms(String email) throws ParseException, SlotNotFoundException {
 		getGyms();
-		System.out.print("Enter gym ID: ");
+		System.out.print("Enter Gym ID: ");
 		String gymId = sc.next();
 		System.out.print("Enter Date (yyyy-mm-dd): ");
 		String dateStr = sc.next();
@@ -111,10 +113,13 @@ public class CustomerFlipFitClient {
 	}
 
 	public void editProfile(String email) {
+		System.out.println("==========================================");
+		System.out.println("              Edit Profile               ");
+		System.out.println("==========================================");
 		System.out.println("Want to change password? Yes/No");
 		String choice = sc.next();
 		if(choice.equals("Yes")){
-			System.out.print("Enter password: ");
+			System.out.print("Enter Password: ");
 			customer.setPassword(sc.next());
 		}
 		System.out.println("Want to change name? Yes/No");
@@ -129,7 +134,7 @@ public class CustomerFlipFitClient {
 			System.out.print("Enter Phone Number: ");
 			customer.setPhoneNumber(sc.next());
 		}
-		System.out.println("Want to change phone age? Yes/No");
+		System.out.println("Want to change age? Yes/No");
 		choice = sc.next();
 		if(choice.equals("Yes")) {
 			System.out.print("Enter Age: ");
@@ -156,6 +161,9 @@ public class CustomerFlipFitClient {
 	}
 
 	public void cancelBooking(String email) {
+		System.out.println("==========================================");
+		System.out.println("            Cancel Booking               ");
+		System.out.println("==========================================");
 		System.out.print("Enter booking ID that you want to cancel: ");
 		String bookingId = sc.next();
 		customerBusiness.cancelBooking(bookingId, email);
@@ -165,7 +173,9 @@ public class CustomerFlipFitClient {
 		int choice = 0;
 
 		while (choice != 6) {
-			System.out.println("Menu:-");
+			System.out.println("==========================================");
+			System.out.println("                 Menu                    ");
+			System.out.println("==========================================");
 			System.out.println("1.View Gyms \n2.View Booked Slots \n3.Cancel Booked Slots \n4.Edit Profile \n5.View Profile \n6.Exit");
 			System.out.print("Enter your choice: ");
 			choice = sc.nextInt();
