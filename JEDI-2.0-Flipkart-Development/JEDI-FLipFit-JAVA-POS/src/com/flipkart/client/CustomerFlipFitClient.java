@@ -2,6 +2,8 @@ package com.flipkart.client;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -75,6 +77,24 @@ public class CustomerFlipFitClient {
 //		System.out.println();
 //		System.out.println("\n______________________________________________________________");
 //	}
+	public static boolean isValidFutureDate(String inputDate) {
+		try {
+			// Parse the input date
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+			LocalDate date = LocalDate.parse(inputDate, formatter);
+
+			// Get today's date
+			LocalDate currentDate = LocalDate.now();
+
+			// Check if the parsed date is today or in the future
+			return !date.isBefore(currentDate);
+		} catch (Exception e) {
+			// Handle parsing errors or invalid date format
+			return false;
+		}
+	}
+
+
 	public void viewGyms(String email) throws ParseException, SlotNotFoundException {
 		getGyms();
 		System.out.print("Enter Gym ID: ");
@@ -83,6 +103,12 @@ public class CustomerFlipFitClient {
 		String dateStr = sc.next();
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		Date date = dateFormat.parse(dateStr);
+
+		if (isValidFutureDate(dateStr)) {
+			System.out.println("The entered date is valid and in the future.");
+		} else {
+			System.out.println("Invalid date. Please enter today's date or a future date.");
+		}
 
 		List<Slot> slots = customerBusiness.getSlotInGym(gymId);
 		for (Slot slot : slots) {

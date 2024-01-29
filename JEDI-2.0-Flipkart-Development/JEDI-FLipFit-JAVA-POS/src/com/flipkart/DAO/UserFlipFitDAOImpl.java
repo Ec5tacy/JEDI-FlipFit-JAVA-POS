@@ -39,6 +39,26 @@ public class  UserFlipFitDAOImpl implements UserFlipFitDAO {
 		return isUserValid;
 	}
 
+	public String getPassword(String email){
+		Connection connection = null;
+		String password = "";
+		try {
+			connection = DBUtils.getConnection();
+			PreparedStatement preparedStatement = connection
+					.prepareStatement(SQLConstants.SQL_SELECT_USER_LOGIN_CREDENTIAL);
+			preparedStatement.setString(1, email);
+
+			ResultSet rs = preparedStatement.executeQuery();
+			while(rs.next()){
+				password = rs.getString("password");
+			}
+
+		} catch (SQLException e) {
+			printSQLException(e);
+		}
+		return password;
+	}
+
 	public boolean registerCustomer(Customer customer) {
 		Connection connection = null;
 		boolean registerSuccess = false;

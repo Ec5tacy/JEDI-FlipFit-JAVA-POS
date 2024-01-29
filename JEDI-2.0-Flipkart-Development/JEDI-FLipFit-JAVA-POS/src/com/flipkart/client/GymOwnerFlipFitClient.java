@@ -5,9 +5,11 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.regex.*;
 
+import com.flipkart.DAO.UserFlipFitDAOImpl;
 import com.flipkart.bean.Gym;
 import com.flipkart.bean.GymOwner;
 import com.flipkart.bean.Slot;
+import com.flipkart.bean.User;
 import com.flipkart.service.GymOwnerFlipFitServiceImpl;
 import com.flipkart.service.UserFlipFitServiceImpl;
 import com.flipkart.constants.ColorConstants;
@@ -16,6 +18,7 @@ import com.flipkart.exception.GymOwnerNotFoundException;
 import com.flipkart.exception.UnauthorizedAccessException;
 import com.flipkart.exception.UserAlreadyExistsException;
 import com.flipkart.utils.IdGenerator;
+import com.flipkart.DAO.UserFlipFitDAOImpl;
 
 public class GymOwnerFlipFitClient {
 
@@ -72,12 +75,21 @@ public class GymOwnerFlipFitClient {
     }
 
 	public void editProfile(Scanner in, String email) {
+
 		try {
 			gymOwner = gymOwnerBusiness.getProfile(email);
 		} catch (GymOwnerNotFoundException e) {
 			// TODO Auto-generated catch block
 			System.out.println(ColorConstants.RED + e.getMessage() + ColorConstants.RESET);
 			return;
+		}
+		try{
+			UserFlipFitDAOImpl u1 = new UserFlipFitDAOImpl();
+
+			gymOwner.setPassword(u1.getPassword(gymOwner.getEmail()));
+		}catch (Error e){
+			System.out.println("Bad issue");
+			return ;
 		}
 		Scanner sc = new Scanner(System.in);
 		System.out.println("==========================================");
@@ -97,9 +109,9 @@ public class GymOwnerFlipFitClient {
 		}
 		System.out.println("Want to change Name? Yes/No");
 		choice = sc.next();
+		gymOwner.setRoleId("GymOwner");
 		if(choice.equals("Yes")){
 			System.out.print("Enter Name: ");
-			gymOwner.setRoleId("GymOwner");
 			gymOwner.setName(in.next());
 		}
 		System.out.println("Want to change Phone Number? Yes/No");
