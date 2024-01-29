@@ -150,20 +150,22 @@ public class CustomerFlipFitClient {
 	public void getGyms() {
 		System.out.print("Enter your city: ");
 		List<Gym> gyms = customerBusiness.getGymInCity(sc.next());
-		System.out.println("________________________________________");
-		System.out.println("| Gym Id | Gym Owner Email | Gym Name  |");
-		System.out.println("________________________________________");
+		System.out.println("________________________________________________");
+		System.out.println("|\tGym Id\t|\tGym Owner Email\t|\tGym Name\t|");
+		System.out.println("________________________________________________");
 		System.out.println();
 		for (Gym gym : gyms) {
-			System.out.print("| " + gym.getGymId()+" | ");
-			System.out.print( gym.getOwnerEmail()+" | ");
-			System.out.print(gym.getGymName()+" |");
+			System.out.print("|\t" + gym.getGymId()+"\t|\t");
+			System.out.print( gym.getOwnerEmail()+"\t|\t");
+			System.out.print(gym.getGymName()+"\t|");
 			System.out.println();
-			System.out.println("________________________________________");
+			System.out.println("________________________________________________");
 			System.out.println();
 		}
 		System.out.println();
 	}
+
+
 
 	public void cancelBooking(String email) {
 		System.out.println("==========================================");

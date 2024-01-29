@@ -98,15 +98,13 @@ public class AdminFlipFitClient {
 	}
 
 	public void viewAllGyms(List<Gym> gyms) {
-		System.out.println("================= All Gyms =================");
+		System.out.println("========================================== All Gyms ==========================================");
 		for (Gym gym : gyms) {
-			System.out.println("Gym ID: " + gym.getGymId());
-			System.out.println("Name: " + gym.getGymName());
-			System.out.println("Owner Email: " + gym.getOwnerEmail());
-			System.out.println("Address: " + gym.getAddress());
-			System.out.println("Slot Count: " + gym.getSlotCount());
-			System.out.println("Verification: " + (gym.isVerified() ? "Approved" : "Pending"));
-			System.out.println("===============================================");
+			System.out.printf("%15s%15s%15s%15s%15s%15s","Gym ID", "Name", "Owner Email", "Address", "Slot Count", "Verification");
+			System.out.println();
+			System.out.printf("%15s%15s%15s%15s%15s%15s", gym.getGymId(), gym.getGymName(), gym.getOwnerEmail(), gym.getAddress(), gym.getSlotCount(), (gym.isVerified() ? "Approved" : "Pending"));
+			System.out.println();
+			System.out.println("==============================================================================================");
 		}
 	}
 

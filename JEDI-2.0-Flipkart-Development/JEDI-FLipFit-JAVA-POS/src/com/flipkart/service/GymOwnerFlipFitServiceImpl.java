@@ -53,6 +53,14 @@ public class GymOwnerFlipFitServiceImpl implements GymOwnerFlipFitServiceInterfa
 		System.out.println(ColorConstants.GREEN + "\nAdded Gym Successfully! " + gym.getGymId() + ColorConstants.RESET );
 		return true;
 	}
+
+	public Gym getGymById(String gymId) throws GymNotFoundException {
+		Gym gym = gymOwnerDAO.getGymById(gymId);
+		if (gym == null)
+			throw new GymNotFoundException();
+//		System.out.println(ColorConstants.GREEN +"Fetched Gym owner details successfully! " + email+ColorConstants.RESET);
+		return gym;
+	}
 	/**
 	 * This method allows a gym owner to edit details of a particular gym.
 	 * @param gym the gym object representing the gym details
