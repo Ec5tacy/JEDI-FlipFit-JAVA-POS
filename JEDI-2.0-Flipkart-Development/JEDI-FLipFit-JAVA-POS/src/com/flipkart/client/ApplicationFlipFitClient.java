@@ -12,20 +12,21 @@ public class ApplicationFlipFitClient {
 	public static void login() throws Exception {
 		Scanner in = new Scanner(System.in);
 
-		System.out.println("__________________________________________________________________________________\n");
-		System.out.println("Enter LogIn Details\n");
+		System.out.println("=========================================");
+		System.out.println("            LogIn Details                ");
+		System.out.println("=========================================");
 		System.out.print("Enter Email: ");
 		String userEmail = in.next();
 		System.out.print("Enter Password: ");
 		String password = in.next();
 		System.out.print("Enter Role ID: 1. Customer 2. Gym Owner 3. Gym Administrator ");
 		String roleCode = in.next();
-		String roleId="Admin";
-		if(roleCode.equals("1"))//tokenising the role id
+		String roleId = "Admin";
+		if (roleCode.equals("1")) // tokenizing the role id
 		{
 			roleId = "Customer";
 		}
-		if(roleCode.equals("2")) {
+		if (roleCode.equals("2")) {
 			roleId = "GymOwner";
 		}
 		User user = new User(userEmail, password, roleId);
@@ -37,9 +38,10 @@ public class ApplicationFlipFitClient {
 		}
 		try {
 			userBusiness.authenticateUser(user);
-			System.out.println("__________________________________________________________________________________\n");
+			System.out.println("=========================================");
 			System.out.println(
-					ColorConstants.GREEN + "Welcome " + userEmail + "! You are logged in. " + "(" + new Date() + ")" + ColorConstants.RESET);
+					ColorConstants.GREEN + "Welcome " + userEmail + "! You are logged in. " + "(" + new Date() + ")"
+							+ ColorConstants.RESET);
 
 			if (roleId.equalsIgnoreCase("Customer")) {
 
@@ -54,7 +56,7 @@ public class ApplicationFlipFitClient {
 			} else {
 				System.out.println(ColorConstants.RED + "Wrong Choice!" + ColorConstants.RESET);
 			}
-		} catch(UserNotFoundException e) {
+		} catch (UserNotFoundException e) {
 			System.out.println(ColorConstants.RED + e.getMessage() + ColorConstants.RESET);
 		}
 	}
@@ -62,10 +64,10 @@ public class ApplicationFlipFitClient {
 	public static void applicationMenu() throws Exception {
 		boolean recur = true;
 
-		int choice=0;
-		while (choice!=4) {
-			System.out.println(ColorConstants.GREEN + "Welcome to the FlipFit Application!" + ColorConstants.RESET);
-			System.out.println("_______________________________________");
+		int choice = 0;
+		while (choice != 4) {
+			System.out.println(ColorConstants.GREEN + "\nWelcome to the FlipFit Application!" + ColorConstants.RESET);
+			System.out.println("=========================================");
 			System.out.println("\nChoose your action:");
 			System.out.println("1. Login");
 			System.out.println("2. Customer Registration");
@@ -98,7 +100,7 @@ public class ApplicationFlipFitClient {
 					System.exit(0);
 					break;
 				default:
-					System.out.println(ColorConstants.RED + "Wrong choice" + ColorConstants.RESET);
+					System.out.println(ColorConstants.RED + "Wrong Choice!" + ColorConstants.RESET);
 			}
 		}
 

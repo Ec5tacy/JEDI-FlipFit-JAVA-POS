@@ -24,7 +24,10 @@ public class GymOwnerFlipFitClient {
 	UserFlipFitServiceImpl userBusiness = new UserFlipFitServiceImpl();
 
 	public void gymOwnerRegistration(Scanner in) throws UserAlreadyExistsException {
-		System.out.println("\nEnter GymOwner Details: \n");
+		System.out.println("==========================================");
+		System.out.println("            Gym Owner Registration         ");
+		System.out.println("==========================================");
+		System.out.println("\nEnter Gym Owner Details: \n");
 		String aadhar="",email="",phoneNo="",pan="";
 		String regex = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$";
 		Pattern pattern = Pattern.compile(regex);
@@ -36,25 +39,22 @@ public class GymOwnerFlipFitClient {
 		}
 		gymOwner.setEmail(email);
 
-
 		System.out.print("Enter Password: ");
 		gymOwner.setPassword(in.next());
 		gymOwner.setRoleId("GymOwner");
 		System.out.print("Enter Name: ");
 		gymOwner.setName(in.next());
 
-
-
 		while(phoneNo.length()!=10){
 			if(!phoneNo.isEmpty())System.out.println("Invalid Phone number");
-			System.out.println("Enter phone number");
+			System.out.println("Enter Phone Number");
 			phoneNo = in.next();
 		}
 		gymOwner.setPhoneNumber(phoneNo);
 
 		while(aadhar.length()!=12){
-			if(!aadhar.isEmpty())System.out.println("Invalid Aadhaar ID");
-			System.out.println("Enter Aadhaar Id");
+			if(!aadhar.isEmpty())System.out.println("Invalid Aadhaar Number");
+			System.out.println("Enter Aadhaar Number");
 			aadhar = in.next();
 		}
 		gymOwner.setAadharNumber(aadhar);
@@ -65,9 +65,6 @@ public class GymOwnerFlipFitClient {
 		}
 		gymOwner.setPanNumber(pan);
 
-
-
-
 		UserFlipFitServiceImpl userBusiness = new UserFlipFitServiceImpl();
         userBusiness.registerGymOwner(gymOwner);
         System.out
@@ -76,6 +73,9 @@ public class GymOwnerFlipFitClient {
 
 	public void editProfile(Scanner in, String email) {
 		Scanner sc = new Scanner(System.in);
+		System.out.println("==========================================");
+		System.out.println("              Edit Profile               ");
+		System.out.println("==========================================");
 		System.out.println("Want to change Email? Yes/No");
 		String choice = sc.next();
 		if(choice.equals("Yes")){
@@ -101,16 +101,16 @@ public class GymOwnerFlipFitClient {
 			System.out.print("Enter Phone Number: ");
 			gymOwner.setPhoneNumber(in.next());
 		}
-		System.out.println("Want to change PAN? Yes/No");
+		System.out.println("Want to change PAN Number? Yes/No");
 		choice = sc.next();
 		if(choice.equals("Yes")) {
-			System.out.print("Enter PAN: ");
+			System.out.print("Enter PAN Number: ");
 			gymOwner.setPanNumber(in.next());
 		}
-		System.out.println("Want to change Aadhar? Yes/No");
+		System.out.println("Want to change Aadhar Number? Yes/No");
 		choice = sc.next();
 		if(choice.equals("Yes")) {
-			System.out.print("Enter Aadhaar: ");
+			System.out.print("Enter Aadhaar Number: ");
 			gymOwner.setAadharNumber(in.next());
 		}
 		try {
@@ -148,7 +148,7 @@ public class GymOwnerFlipFitClient {
 		gym.setOwnerEmail(email);
 		System.out.print("Address: ");
 		gym.setAddress(in.next());
-		System.out.print("SlotCount: ");
+		System.out.print("Slot Count: ");
 		try {
 			gym.setSlotCount(in.nextInt());
 		} catch (InputMismatchException e) {
@@ -247,7 +247,7 @@ public class GymOwnerFlipFitClient {
 	public void gymOwnerMenu(Scanner in, String email) {
 		boolean recur = true;
 		while (recur) {
-			System.out.println("\nHere are the actions you can perform!");
+			System.out.println("\nActions:");
 
 			System.out.println("1. View Profile");
 			System.out.println("2. Edit Profile");
