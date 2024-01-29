@@ -8,6 +8,7 @@ import com.flipkart.bean.User;
 import com.flipkart.service.UserFlipFitServiceImpl;
 import com.flipkart.constants.*;
 import com.flipkart.exception.UserNotFoundException;
+import static com.flipkart.constants.ColorConstants.*;
 
 public class ApplicationFlipFitClient {
 
@@ -20,13 +21,13 @@ public class ApplicationFlipFitClient {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 		String formattedDateTime = currentDateTime.format(formatter);
 		System.out.println("=========================================");
-		System.out.println("            LogIn Details                ");
+		System.out.println(ColorConstants.BOLD_TEXT+ColorConstants.BLUE+"            LogIn Details                "+ ColorConstants.RESET);
 		System.out.println("=========================================");
-		System.out.print("Enter Email: ");
+		System.out.print(ColorConstants.BOLD_TEXT+ CYAN+"Enter Email: "+ColorConstants.RESET);
 		String userEmail = in.next();
-		System.out.print("Enter Password: ");
+		System.out.print(ColorConstants.BOLD_TEXT+ CYAN+"Enter Password: "+ColorConstants.RESET);
 		String password = in.next();
-		System.out.print("Enter Role ID: 1. Customer 2. Gym Owner 3. Gym Administrator ");
+		System.out.print(ColorConstants.BOLD_TEXT+ CYAN+"Enter Role ID: 1. Customer 2. Gym Owner 3. Gym Administrator "+ColorConstants.RESET);
 		String roleCode = in.next();
 		String roleId = "Admin";
 		if (roleCode.equals("1")) // tokenizing the role id
@@ -72,17 +73,18 @@ public class ApplicationFlipFitClient {
 		boolean recur = true;
 
 		int choice = 0;
-		while (choice != 4) {
+		while (choice != 4){
+			System.out.println(WELCOME_MESSAGE);
 			System.out.println("=============================================");
-			System.out.println(ColorConstants.GREEN + "\tWelcome to the FlipFit Application!" + ColorConstants.RESET);
+			System.out.println(ColorConstants.BLUE + "\tWELCOME TO THE FLIPFIT APPLICATION!" + ColorConstants.RESET);
 			System.out.println("=============================================");
-			System.out.println("\nChoose your action:");
+			System.out.println(ColorConstants.BOLD_TEXT+ColorConstants.CYAN+"\nChoose your action:"+ColorConstants.RESET);
 			System.out.println();
-			System.out.println("1. Login");
-			System.out.println("2. Customer Registration");
-			System.out.println("3. Gym Owner Registration");
-			System.out.println("4. Exit");
-			System.out.print("\nEnter Your Choice: ");
+			System.out.println(ColorConstants.BOLD_TEXT+ColorConstants.BLUE+"1. Login"+ ColorConstants.RESET);
+			System.out.println(ColorConstants.BOLD_TEXT+ColorConstants.BLUE+"2. Customer Registration"+ ColorConstants.RESET);
+			System.out.println(ColorConstants.BOLD_TEXT+ColorConstants.BLUE+"3. Gym Owner Registration"+ ColorConstants.RESET);
+			System.out.println(ColorConstants.BOLD_TEXT+ColorConstants.BLUE+"4. Exit"+ ColorConstants.RESET);
+			System.out.print(ColorConstants.BOLD_TEXT+ CYAN+"\nEnter Your Choice: "+ColorConstants.RESET);
 
 			Scanner in = new Scanner(System.in);
 
