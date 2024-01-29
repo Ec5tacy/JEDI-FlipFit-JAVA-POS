@@ -10,7 +10,7 @@ import com.flipkart.bean.User;
 import com.flipkart.constants.SQLConstants;
 import com.flipkart.utils.DBUtils;
 
-public class UserFlipFitDAOImpl implements UserFlipFitDAO {
+public class  UserFlipFitDAOImpl implements UserFlipFitDAO {
 
 	public boolean authenticateUser(User user) {
 		// to run without authentication, make isUserValid = true

@@ -34,8 +34,6 @@ public class CustomerFlipFitClient {
 			m = pattern.matcher(email);
 		}
 		customer.setEmail(email);
-		System.out.print("Enter email: ");
-		customer.setEmail(sc.next());
 		System.out.print("Enter password: ");
 		customer.setPassword(sc.next());
 		customer.setRoleId("Customer");
