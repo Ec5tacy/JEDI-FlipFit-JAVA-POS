@@ -98,25 +98,42 @@ public class AdminFlipFitClient {
 	}
 
 	public void viewAllGyms(List<Gym> gyms) {
+//		System.out.println("========================================== All Gyms ==========================================");
+//		for (Gym gym : gyms) {
+//			System.out.printf("%15s%15s%15s%15s%15s%15s","Gym ID", "Name", "Owner Email", "Address", "Slot Count", "Verification");
+//			System.out.println();
+//			System.out.printf("%15s%15s%15s%15s%15s%15s", gym.getGymId(), gym.getGymName(), gym.getOwnerEmail(), gym.getAddress(), gym.getSlotCount(), (gym.isVerified() ? "Approved" : "Pending"));
+//			System.out.println();
+//			System.out.println("==============================================================================================");
+//		}
 		System.out.println("========================================== All Gyms ==========================================");
-		for (Gym gym : gyms) {
-			System.out.printf("%15s%15s%15s%15s%15s%15s","Gym ID", "Name", "Owner Email", "Address", "Slot Count", "Verification");
+		gyms.forEach(gym -> {
+			System.out.printf("%15s%15s%15s%15s%15s%15s", "Gym ID", "Name", "Owner Email", "Address", "Slot Count", "Verification");
 			System.out.println();
 			System.out.printf("%15s%15s%15s%15s%15s%15s", gym.getGymId(), gym.getGymName(), gym.getOwnerEmail(), gym.getAddress(), gym.getSlotCount(), (gym.isVerified() ? "Approved" : "Pending"));
 			System.out.println();
 			System.out.println("==============================================================================================");
-		}
+		});
 	}
 
 	public void viewAllGymOwners(List<GymOwner> gymOwners) {
+//		System.out.println("================= All Gym Owners =================");
+//		for (GymOwner gymOwner : gymOwners) {
+//			System.out.println("Name: " + gymOwner.getName());
+//			System.out.println("Phone Number: " + gymOwner.getPhoneNumber());
+//			System.out.println("Aadhar Number: " + gymOwner.getAadharNumber());
+//			System.out.println("PAN Number: " + gymOwner.getPanNumber());
+//			System.out.println("Verification: " + (gymOwner.isVerified() ? "Approved" : "Pending"));
+//			System.out.println("===================================================");
+//		}
 		System.out.println("================= All Gym Owners =================");
-		for (GymOwner gymOwner : gymOwners) {
+		gymOwners.forEach(gymOwner -> {
 			System.out.println("Name: " + gymOwner.getName());
 			System.out.println("Phone Number: " + gymOwner.getPhoneNumber());
 			System.out.println("Aadhar Number: " + gymOwner.getAadharNumber());
 			System.out.println("PAN Number: " + gymOwner.getPanNumber());
 			System.out.println("Verification: " + (gymOwner.isVerified() ? "Approved" : "Pending"));
 			System.out.println("===================================================");
-		}
+		});
 	}
 }

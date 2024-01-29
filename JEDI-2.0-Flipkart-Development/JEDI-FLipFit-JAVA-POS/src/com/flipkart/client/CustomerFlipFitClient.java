@@ -130,11 +130,18 @@ public class CustomerFlipFitClient {
 			System.out.println("Invalid date. Please enter today's date or a future date.");
 		}
 
+//		List<Slot> slots = customerBusiness.getSlotInGym(gymId);
+//		for (Slot slot : slots) {
+//			System.out.print("Slot Id: " + slot.getSlotId());
+//			System.out.print("Availability: " + customerBusiness.isSlotBooked(slot.getSlotId(), String.valueOf(date)));
+//		}
 		List<Slot> slots = customerBusiness.getSlotInGym(gymId);
-		for (Slot slot : slots) {
+		slots.forEach(slot -> {
 			System.out.print("Slot Id: " + slot.getSlotId());
 			System.out.print("Availability: " + customerBusiness.isSlotBooked(slot.getSlotId(), String.valueOf(date)));
-		}
+			System.out.println(); // Add a newline for better readability between slots
+		});
+
 		System.out.print("Enter the slot ID which you want to book: ");
 		String slotId = sc.next();
 		int bookingResponse = customerBusiness.bookSlot(gymId,slotId, email, String.valueOf(date));
@@ -228,12 +235,19 @@ public class CustomerFlipFitClient {
 		System.out.println("==========================================================================");
 		System.out.printf("%15s%20s%15s", "Gym Id", "Gym Owner Email", "Gym Name");
 		System.out.println();
-		for (Gym gym : gyms) {
-			System.out.printf("%15s%20s%15s", gym.getGymId(), gym.getOwnerEmail(),gym.getGymName() );
+//		for (Gym gym : gyms) {
+//			System.out.printf("%15s%20s%15s", gym.getGymId(), gym.getOwnerEmail(),gym.getGymName() );
+//			System.out.println();
+//			System.out.println("==========================================================================");
+//			System.out.println();
+//		}
+		gyms.forEach(gym -> {
+			System.out.printf("%15s%20s%15s", gym.getGymId(), gym.getOwnerEmail(), gym.getGymName());
 			System.out.println();
 			System.out.println("==========================================================================");
 			System.out.println();
-		}
+		});
+
 		System.out.println();
 	}
 
