@@ -7,7 +7,7 @@ import com.flipkart.exception.SlotNotFoundException;
 import java.util.*;
 
 public interface CustomerFlipFitServiceInterface {
-    public Customer getProfile(Customer customer) throws CustomerNotFoundException;
+    public Customer getProfile(String email) throws CustomerNotFoundException;
     /*
     returns the customer profile
     */
@@ -16,7 +16,6 @@ public interface CustomerFlipFitServiceInterface {
     /*
     allows the customer to edit profile
     */
-
     public List<Gym> getGymInCity(String city) ;
     public List<Slot> getSlotInGym(String gymId) throws SlotNotFoundException;
     public boolean isSlotBooked(String slotId, String date);

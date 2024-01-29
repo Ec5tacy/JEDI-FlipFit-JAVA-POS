@@ -13,6 +13,7 @@ public interface CustomerFlipFitDAO {
 
 	public int editCustomerDetails(Customer customer);
 	public List<Gym> fetchGymList(String city);
+	public Customer getCustomerDetails(String customerEmailId);
 
 	public List<Slot> fetchSlotList(String gymId) throws SlotNotFoundException;
 

@@ -45,6 +45,39 @@ public class CustomerFlipFitDAOImpl implements CustomerFlipFitDAO {
 		return gyms;
 	}
 
+	public Customer getCustomerDetails(String customerEmailId) {
+		Connection connection = null;
+		Customer customer = new Customer();
+		try {
+			connection = DBUtils.getConnection();
+			// Step 2:Create a statement using connection object
+			PreparedStatement preparedStatement = connection.prepareStatement(SQLConstants.SQL_VIEW_CUSTOMER);
+			preparedStatement.setString(1, customerEmailId);
+			//System.out.println(preparedStatement);
+			// Step 3: Execute the query or update query
+			ResultSet rs = preparedStatement.executeQuery();
+			if (!rs.next())
+				return null;
+			// Step 4: Process the ResultSet object.
+			do {
+				customer.setEmail(rs.getString("email"));
+				customer.setName(rs.getString("name"));
+				customer.setPhoneNumber(rs.getString("phoneNum"));
+				customer.setAge(rs.getInt("age"));
+				customer.setAddress(rs.getString("address"));
+
+//				customer.setAadharNumber(rs.getString("aadharNum"));
+//				gymOwner.setPanNumber(rs.getString("panNum"));
+
+				// System.out.println(id + "," + name + "," + email + "," + country + "," + password);
+			} while (rs.next());
+		} catch (SQLException e) {
+			printSQLException(e);
+		}
+		// Step 4: try-with-resource statement will auto close the connection.
+		return customer;
+	}
+
 
 	// shows all the slots in the provided gym
 	public List<Slot> fetchSlotList(String gymId) throws SlotNotFoundException {
@@ -116,7 +149,10 @@ public class CustomerFlipFitDAOImpl implements CustomerFlipFitDAO {
 //            printSQLException(sqlExcep);
 		}
 	}
-
+	public Customer getProfile(Customer customer)
+	{
+		return customer;
+	}
 	// returns true if the slot is fully booked
 	public boolean isFull(String slotId, String date) {
 		Connection connection = null;
@@ -249,10 +285,6 @@ public class CustomerFlipFitDAOImpl implements CustomerFlipFitDAO {
 //            printSQLException(e);
 		}
 		return false;
-	}
-	public Customer getProfile(Customer customer)
-	{
-		return customer;
 	}
 
 	public int editCustomerDetails(Customer customer) {

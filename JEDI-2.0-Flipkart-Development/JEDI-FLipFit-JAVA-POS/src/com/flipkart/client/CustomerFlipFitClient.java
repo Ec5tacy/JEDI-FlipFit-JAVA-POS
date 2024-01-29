@@ -12,6 +12,7 @@ import com.flipkart.bean.Customer;
 import com.flipkart.bean.Gym;
 import com.flipkart.bean.Slot;
 import com.flipkart.constants.ColorConstants;
+import com.flipkart.exception.CustomerNotFoundException;
 import com.flipkart.exception.GymOwnerNotFoundException;
 import com.flipkart.service.CustomerFlipFitServiceImpl;
 import com.flipkart.service.UserFlipFitServiceImpl;
@@ -77,6 +78,24 @@ public class CustomerFlipFitClient {
 //		System.out.println();
 //		System.out.println("\n______________________________________________________________");
 //	}
+
+	public void getProfile(Scanner in, String email) {
+		try {
+			customer = customerBusiness.getProfile(email);
+		} catch (CustomerNotFoundException e) {
+			// TODO Auto-generated catch block
+			System.out.println(ColorConstants.RED + e.getMessage() + ColorConstants.RESET);
+			return;
+		}
+		System.out.println("______________________");
+		System.out.printf("%15s%15s%15s%15s", "Customer Name", "Phone Number", "Address", "Age");
+		System.out.println();
+		System.out.printf("%15s%15s%15s%15s", customer.getName(), customer.getPhoneNumber(), customer.getAddress(),
+				customer.getAge());
+		System.out.println();
+		System.out.println("\n______________________");
+//		n______________________");
+	}
 	public static boolean isValidFutureDate(String inputDate) {
 		try {
 			// Parse the input date
@@ -227,7 +246,7 @@ public class CustomerFlipFitClient {
 					editProfile(email);
 					break;
 				case 5:
-//					viewProfile(email);
+					getProfile(sc,email);
 				case 6:
 					break;
 				default:
