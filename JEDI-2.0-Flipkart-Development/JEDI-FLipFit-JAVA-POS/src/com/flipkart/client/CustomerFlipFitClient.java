@@ -8,6 +8,7 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.flipkart.DAO.UserFlipFitDAOImpl;
 import com.flipkart.bean.Customer;
 import com.flipkart.bean.Gym;
 import com.flipkart.bean.Slot;
@@ -155,12 +156,36 @@ public class CustomerFlipFitClient {
 		}
 	}
 
-	public void editProfile(String email) {
+	public void editProfile(String email) throws CustomerNotFoundException {
 		System.out.println("==========================================");
 		System.out.println("              Edit Profile               ");
 		System.out.println("==========================================");
 		System.out.println("Want to change password? Yes/No");
 		String choice = sc.next();
+		Customer customer = new Customer();
+		try{
+			Customer existingCustomer = customerBusiness.getProfile(email);
+			if (existingCustomer != null) {
+				// Use existing values as default values
+				customer.setEmail(existingCustomer.getEmail());
+				customer.setName(existingCustomer.getName());
+				customer.setPhoneNumber(existingCustomer.getPhoneNumber());
+				customer.setAddress(existingCustomer.getAddress());
+				customer.setAge(existingCustomer.getAge());
+
+			}
+		}catch (Error e){
+			System.out.println("Bad issue");
+		}
+
+		try{
+			UserFlipFitDAOImpl u1 = new UserFlipFitDAOImpl();
+			customer.setPassword(u1.getPassword(customer.getEmail()));
+		}catch (Error e){
+			System.out.println("Bad issue");
+			return ;
+		}
+
 		if(choice.equals("Yes")){
 			System.out.print("Enter Password: ");
 			customer.setPassword(sc.next());
@@ -183,11 +208,16 @@ public class CustomerFlipFitClient {
 			System.out.print("Enter Age: ");
 			customer.setAge(Integer.valueOf(sc.next()));
 		}
-		System.out.println("Want to change phone address? Yes/No");
+		System.out.println("Want to change address? Yes/No");
 		choice = sc.next();
 		if(choice.equals("Yes")) {
 			System.out.print("Enter Address: ");
 			customer.setAddress(sc.next());
+		}
+		try{
+			customerBusiness.editProfile(customer);
+		}catch (Error e){
+			return ;
 		}
 		System.out.println("Successfully edited your profile");
 	}
@@ -218,7 +248,7 @@ public class CustomerFlipFitClient {
 		customerBusiness.cancelBooking(bookingId, email);
 	}
 
-	public void customerMenu(String email) throws ParseException, SlotNotFoundException {
+	public void customerMenu(String email) throws ParseException, SlotNotFoundException, CustomerNotFoundException {
 		int choice = 0;
 
 		while (choice != 6) {

@@ -1,5 +1,7 @@
 package com.flipkart.client;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 import com.flipkart.bean.User;
@@ -12,6 +14,11 @@ public class ApplicationFlipFitClient {
 	public static void login() throws Exception {
 		Scanner in = new Scanner(System.in);
 
+		LocalDateTime currentDateTime = LocalDateTime.now();
+
+		// Format the date and time
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+		String formattedDateTime = currentDateTime.format(formatter);
 		System.out.println("=========================================");
 		System.out.println("            LogIn Details                ");
 		System.out.println("=========================================");
@@ -40,7 +47,7 @@ public class ApplicationFlipFitClient {
 			userBusiness.authenticateUser(user);
 			System.out.println("=========================================");
 			System.out.println(
-					ColorConstants.GREEN + "Welcome " + userEmail + "! You are logged in. " + "(" + new Date() + ")"
+					ColorConstants.GREEN + "Welcome " + userEmail + "! You are logged in. " + "(" + formattedDateTime + ")"
 							+ ColorConstants.RESET);
 
 			if (roleId.equalsIgnoreCase("Customer")) {
