@@ -23,19 +23,20 @@ public class CustomerFlipFitServiceImpl implements CustomerFlipFitServiceInterfa
 	//Date d1 = new Date();
 
 
-	/**
-	 * Obtains customer's profile details
-	 * @param customer the Customer object for which the profile details are requested
-	 * @return Customer the Customer's object
-	 */
-	public Customer getProfile(Customer customer) throws CustomerNotFoundException {
-		System.out.println(ColorConstants.GREEN+"Successfully fetched the customer profile"+ColorConstants.RESET);
-		Customer cus=	customerDAO.getProfile(customer);
-		if (cus == null)
+	public Customer getProfile(String email) throws CustomerNotFoundException {
+//		System.out.println(ColorConstants.GREEN+"Successfully fetched the customer profile"+ColorConstants.RESET);
+//		Customer cus=	customerDAO.getProfile(customer);
+//		if (cus == null)
+//			throw new CustomerNotFoundException();
+//		System.out.println(ColorConstants.GREEN +"Fetched Customer details successfully! "+ColorConstants.RESET);
+//		return cus;
+		Customer customers = customerDAO.getCustomerDetails(email);
+		if (customers == null)
 			throw new CustomerNotFoundException();
-		System.out.println(ColorConstants.GREEN +"Fetched Customer details successfully! "+ColorConstants.RESET);
-		return cus;
+		System.out.println(ColorConstants.GREEN +"Fetched Gym owner details successfully! " + email+ColorConstants.RESET);
+		return customers;
 	}
+
 
 	/**
 	 * Gives functionality of updating customer's personal data.
@@ -47,6 +48,10 @@ public class CustomerFlipFitServiceImpl implements CustomerFlipFitServiceInterfa
 			throw new CustomerNotFoundException();
 		//System.out.println(ColorConstants.GREEN + "\nEdited your profile Successfully!" + ColorConstants.RESET);
 	}
+
+
+
+
 	/**
 	 * Obtains all the bookings done by the given customer email.
 	 * @param email the Customer email for which the bookings data are requested
