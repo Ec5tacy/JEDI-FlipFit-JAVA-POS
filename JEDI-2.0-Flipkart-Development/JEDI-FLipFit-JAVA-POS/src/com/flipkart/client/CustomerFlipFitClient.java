@@ -158,6 +158,7 @@ public class CustomerFlipFitClient {
 			System.out.print("| " + gym.getGymId()+" | ");
 			System.out.print( gym.getOwnerEmail()+" | ");
 			System.out.print(gym.getGymName()+" |");
+			System.out.println();
 			System.out.println("________________________________________");
 			System.out.println();
 		}
