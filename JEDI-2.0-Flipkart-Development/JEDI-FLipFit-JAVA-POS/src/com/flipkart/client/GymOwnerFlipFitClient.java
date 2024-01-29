@@ -72,6 +72,13 @@ public class GymOwnerFlipFitClient {
     }
 
 	public void editProfile(Scanner in, String email) {
+		try {
+			gymOwner = gymOwnerBusiness.getProfile(email);
+		} catch (GymOwnerNotFoundException e) {
+			// TODO Auto-generated catch block
+			System.out.println(ColorConstants.RED + e.getMessage() + ColorConstants.RESET);
+			return;
+		}
 		Scanner sc = new Scanner(System.in);
 		System.out.println("==========================================");
 		System.out.println("              Edit Profile               ");
@@ -129,13 +136,13 @@ public class GymOwnerFlipFitClient {
 			System.out.println(ColorConstants.RED + e.getMessage() + ColorConstants.RESET);
 			return;
 		}
-		System.out.println("______________________________________________________________");
-		System.out.printf("%15s%15s%15s%15s", "Gym Owner Name", "Phone Number", "PAN Number", "Aadhaar Number");
+		System.out.println("==========================================================================");
+		System.out.printf("%15s%15s%15s%20s", "Gym Owner Name", "Phone Number", "PAN Number", "Aadhaar Number");
 		System.out.println();
-		System.out.printf("%15s%15s%15s%15s", gymOwner.getName(), gymOwner.getPhoneNumber(), gymOwner.getPanNumber(),
+		System.out.printf("%15s%15s%15s%20s", gymOwner.getName(), gymOwner.getPhoneNumber(), gymOwner.getPanNumber(),
 				gymOwner.getAadharNumber());
 		System.out.println();
-		System.out.println("\n______________________________________________________________");
+		System.out.println("\n==========================================================================");
 	}
 
 	public void addGym(Scanner in, String email) {
@@ -162,26 +169,64 @@ public class GymOwnerFlipFitClient {
 		gymOwnerBusiness.addGym(gym);
 	}
 
-	public void editGym(Scanner in, String email) {
+	public void editGym(Scanner in, String email) throws GymNotFoundException {
 		System.out.println("Please Enter Gym Details ");
-
+		Scanner sc = new Scanner(System.in);
 		Gym gym = new Gym();
-		System.out.print("Gym Id: ");
+//		System.out.println("Want to change Email? Yes/No");
+//		String choice = sc.next();
+//		if(choice.equals("Yes")){
+//			System.out.println("Enter Email: ");
+//			gymOwner.setEmail(email);
+//		}
+		String choice;
+
+		System.out.println("Enter Gym Id: ");
 		gym.setGymId(in.next());
-		System.out.print("GymName: ");
-		gym.setGymName(in.next());
-		gym.setOwnerEmail(email);
-		System.out.print("Address: ");
-		gym.setAddress(in.next());
-		System.out.print("SlotCount: ");
-		try {
-			gym.setSlotCount(in.nextInt());
-			System.out.print("SeatsPerSlotCount: ");
-			gym.setSeatsPerSlotCount(in.nextInt());
-		} catch (InputMismatchException e) {
-			System.out.println(ColorConstants.RED + e.getMessage() + ColorConstants.RESET);
-			return;
+		Gym existingGym = gymOwnerBusiness.getGymById(gym.getGymId());
+
+		// Check if gym exists and populate values if it exists
+		if (existingGym != null) {
+			// Use existing values as default values
+			gym.setGymName(existingGym.getGymName());
+			gym.setAddress(existingGym.getAddress());
+			gym.setSlotCount(existingGym.getSlotCount());
+			gym.setSeatsPerSlotCount(existingGym.getSeatsPerSlotCount());
+			gym.setGymId(existingGym.getGymId());
+			gym.setOwnerEmail(existingGym.getOwnerEmail());
 		}
+		System.out.println("Want to change Gym Name? Yes/No");
+		choice = sc.next();
+		if(choice.equals("Yes")){
+			System.out.println("Enter Gym Name: ");
+			gym.setGymName(in.next());
+			gym.setOwnerEmail(email);
+		}
+		System.out.println("Want to change Address? Yes/No");
+		choice = sc.next();
+		if(choice.equals("Yes")){
+			System.out.println("Enter Address: ");
+			gym.setAddress(in.next());
+		}
+//
+		System.out.println("Want to change Slot Count? Yes/No");
+		choice = sc.next();
+		if(choice.equals("Yes")) {
+			System.out.println("Enter SlotCount: ");
+			try {
+				gym.setSlotCount(in.nextInt());
+				System.out.println("Want to change Seats Per Slot Count? Yes/No");
+				choice = sc.next();
+				if (choice.equals("Yes")) {
+					System.out.print("Enter SeatsPerSlotCount: ");
+					gym.setSeatsPerSlotCount(in.nextInt());
+				}
+			} catch (InputMismatchException e) {
+				System.out.println(ColorConstants.RED + e.getMessage() + ColorConstants.RESET);
+				return;
+			}
+		}
+
 		gym.setVerified(false);
 
 		try {
@@ -198,7 +243,7 @@ public class GymOwnerFlipFitClient {
 			System.out.println(ColorConstants.RED + "Sorry, no gyms found!" + ColorConstants.RED);
 			return;
 		}
-		System.out.println("_________________________________________________________________________");
+		System.out.println("=================================================================================================");
 		System.out.println();
 		System.out.printf("%15s%15s%15s%15s%15s%15s", "Gym Id", "Gym Name", "Address", "SlotCount", "SeatsPerSlot", "Verification");
 		gymDetails.forEach(gym -> {
@@ -208,7 +253,7 @@ public class GymOwnerFlipFitClient {
 					gym.isVerified() ? "Verified" : "Not Verified");
 		});
 		System.out.println();
-		System.out.println("_________________________________________________________________________");
+		System.out.println("=================================================================================================");
 	}
 
 	public void addSlot(Scanner in, String email) {
@@ -244,7 +289,7 @@ public class GymOwnerFlipFitClient {
 		}
 	}
 
-	public void gymOwnerMenu(Scanner in, String email) {
+	public void gymOwnerMenu(Scanner in, String email) throws GymNotFoundException {
 		boolean recur = true;
 		while (recur) {
 			System.out.println("\nActions:");

@@ -275,6 +275,33 @@ public class GymOwnerFlipFitDAOImpl implements GymOwnerFlipFitDAO {
 		return gyms;
 	}
 
+	public Gym getGymById(String gymId) {
+		Connection connection = null;
+		Gym gym = null;
+		try {
+			connection = DBUtils.getConnection();
+
+			PreparedStatement preparedStatement = connection.prepareStatement(SQLConstants.SQL_SELECT_GYM_BY_ID);
+			preparedStatement.setString(1, gymId);
+
+			ResultSet rs = preparedStatement.executeQuery();
+
+			if (rs.next()) {
+				gym = new Gym();
+				gym.setGymId(rs.getString("gymId"));
+				gym.setGymName(rs.getString("gymName"));
+				gym.setOwnerEmail(rs.getString("ownerEmail"));
+				gym.setAddress(rs.getString("address"));
+				gym.setSlotCount(rs.getInt("slotCount"));
+				gym.setSeatsPerSlotCount(rs.getInt("seatsPerSlotCount"));
+				gym.setVerified(rs.getBoolean("isVerified"));
+			}
+		} catch (SQLException e) {
+			printSQLException(e);
+		}
+		return gym;
+	}
+
 	/**
 	 * Retrieves all the possible slots of a gym from the database
 	 * @param gymId The Id of the gym
