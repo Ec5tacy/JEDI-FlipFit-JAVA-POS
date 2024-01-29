@@ -66,9 +66,11 @@ public class ApplicationFlipFitClient {
 
 		int choice = 0;
 		while (choice != 4) {
-			System.out.println(ColorConstants.GREEN + "\nWelcome to the FlipFit Application!" + ColorConstants.RESET);
-			System.out.println("=========================================");
+			System.out.println("=============================================");
+			System.out.println(ColorConstants.GREEN + "\tWelcome to the FlipFit Application!" + ColorConstants.RESET);
+			System.out.println("=============================================");
 			System.out.println("\nChoose your action:");
+			System.out.println();
 			System.out.println("1. Login");
 			System.out.println("2. Customer Registration");
 			System.out.println("3. Gym Owner Registration");

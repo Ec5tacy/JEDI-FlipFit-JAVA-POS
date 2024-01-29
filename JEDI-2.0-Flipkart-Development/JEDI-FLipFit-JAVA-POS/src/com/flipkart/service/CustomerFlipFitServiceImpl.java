@@ -33,7 +33,7 @@ public class CustomerFlipFitServiceImpl implements CustomerFlipFitServiceInterfa
 		Customer customers = customerDAO.getCustomerDetails(email);
 		if (customers == null)
 			throw new CustomerNotFoundException();
-		System.out.println(ColorConstants.GREEN +"Fetched Gym owner details successfully! " + email+ColorConstants.RESET);
+		System.out.println(ColorConstants.GREEN +"Fetched Customer details successfully! " + email+ColorConstants.RESET);
 		return customers;
 	}
 
