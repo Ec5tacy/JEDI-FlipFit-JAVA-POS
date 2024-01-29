@@ -252,7 +252,7 @@ public class GymOwnerFlipFitClient {
 	public void getGymDetails(Scanner in, String email) {
 		List<Gym> gymDetails = gymOwnerBusiness.getGymDetail(email);
 		if (gymDetails.size() == 0) {
-			System.out.println(ColorConstants.RED + "Sorry, no gyms found!" + ColorConstants.RED);
+			System.out.println(ColorConstants.RED + "Sorry, no gyms found!" + ColorConstants.RESET);
 			return;
 		}
 		System.out.println("=================================================================================================");
