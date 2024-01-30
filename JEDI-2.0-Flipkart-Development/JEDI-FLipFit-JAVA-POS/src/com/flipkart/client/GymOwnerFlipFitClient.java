@@ -19,6 +19,8 @@ import com.flipkart.exception.UnauthorizedAccessException;
 import com.flipkart.exception.UserAlreadyExistsException;
 import com.flipkart.utils.IdGenerator;
 import com.flipkart.DAO.UserFlipFitDAOImpl;
+import com.flipkart.validator.EmailFlipfitValidator;
+import com.flipkart.validator.LengthFlipfitValidator;
 
 public class GymOwnerFlipFitClient {
 
@@ -32,13 +34,11 @@ public class GymOwnerFlipFitClient {
 		System.out.println(ColorConstants.BLUE+"============================================="+ColorConstants.RESET);
 		System.out.println(ColorConstants.BOLD_TEXT+ ColorConstants.CYAN+"\nEnter Gym Owner Details: \n");
 		String aadhar="",email="",phoneNo="",pan="";
-		String regex = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$";
-		Pattern pattern = Pattern.compile(regex);
-		Matcher m = pattern.matcher(email);
-		while(!m.matches()){
-			System.out.print(ColorConstants.BOLD_TEXT+ ColorConstants.CYAN+"Enter Email: "+ColorConstants.RESET);
-			email = in.next();
-			m = pattern.matcher(email);
+		boolean isEmailCorrect=false;
+		while(isEmailCorrect==false){
+            System.out.print(ColorConstants.BOLD_TEXT+ ColorConstants.CYAN+"Enter Email: "+ColorConstants.RESET);
+            email = in.next();
+			isEmailCorrect = EmailFlipfitValidator.isEmailCorrect(email);
 		}
 		gymOwner.setEmail(email);
 
@@ -48,23 +48,25 @@ public class GymOwnerFlipFitClient {
 		System.out.print(ColorConstants.BOLD_TEXT+ ColorConstants.CYAN+"Enter Name: "+ColorConstants.RESET);
 		gymOwner.setName(in.next());
 
-		while(phoneNo.length()!=10){
-			if(!phoneNo.isEmpty())System.out.println(ColorConstants.BOLD_TEXT+ ColorConstants.RED+"Invalid Phone number"+ColorConstants.RESET);
-			System.out.println(ColorConstants.BOLD_TEXT+ ColorConstants.CYAN+"Enter Phone Number"+ColorConstants.RESET);
-			phoneNo = in.next();
+		while(!LengthFlipfitValidator.isLengthCorrect(phoneNo,10)){
+			if(!phoneNo.isEmpty())
+                System.out.println(ColorConstants.BOLD_TEXT+ ColorConstants.RED+"Invalid Phone number"+ColorConstants.RESET);
+            System.out.println(ColorConstants.BOLD_TEXT+ ColorConstants.CYAN+"Enter Phone Number"+ColorConstants.RESET);
+            phoneNo = in.next();
 		}
 		gymOwner.setPhoneNumber(phoneNo);
 
-		while(aadhar.length()!=12){
-			if(!aadhar.isEmpty())System.out.println(ColorConstants.BOLD_TEXT+ ColorConstants.RED+"Invalid Aadhaar Number"+ColorConstants.RESET);
-			System.out.println(ColorConstants.BOLD_TEXT+ ColorConstants.CYAN+"Enter Aadhaar Number"+ColorConstants.RESET);
+		while(!LengthFlipfitValidator.isLengthCorrect(aadhar,12)){
+			if(!aadhar.isEmpty())
+                System.out.println(ColorConstants.BOLD_TEXT+ ColorConstants.RED+"Invalid Aadhaar Number"+ColorConstants.RESET);
+            System.out.println(ColorConstants.BOLD_TEXT+ ColorConstants.CYAN+"Enter Aadhaar Number"+ColorConstants.RESET);
 			aadhar = in.next();
 		}
 		gymOwner.setAadharNumber(aadhar);
-		while(pan.length()!=10){
-			if(!pan.isEmpty())System.out.println(ColorConstants.BOLD_TEXT+ ColorConstants.RED+"Invalid PAN Number"+ColorConstants.RESET);
-			System.out.println(ColorConstants.BOLD_TEXT+ ColorConstants.CYAN+"Enter PAN Number"+ColorConstants.RESET);
-			pan = in.next();
+		while(!LengthFlipfitValidator.isLengthCorrect(pan,10)){
+            if(!pan.isEmpty())System.out.println(ColorConstants.BOLD_TEXT+ ColorConstants.RED+"Invalid PAN Number"+ColorConstants.RESET);
+            System.out.println(ColorConstants.BOLD_TEXT+ ColorConstants.CYAN+"Enter PAN Number"+ColorConstants.RESET);
+            pan = in.next();
 		}
 		gymOwner.setPanNumber(pan);
 

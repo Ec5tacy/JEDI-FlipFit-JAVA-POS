@@ -127,7 +127,7 @@ public class CustomerFlipFitDAOImpl implements CustomerFlipFitDAO {
 				bookings.add(b);
 			}
 		} catch (SQLException sqlExcep) {
-//            printSQLException(sqlExcep);
+            printSQLException(sqlExcep);
 		}
 		return bookings;
 	}
@@ -166,6 +166,23 @@ public class CustomerFlipFitDAOImpl implements CustomerFlipFitDAO {
 //            printSQLException(e);
 		}
 		return false;
+	}
+
+	public String getBookingId(String email,String slotId){
+		Connection connection = null;
+		try {
+			connection = DBUtils.getConnection();
+			PreparedStatement preparedStatement = connection.prepareStatement(SQLConstants.SQL_SELECT_BOOKING_ID);
+			preparedStatement.setString(1, email);
+			preparedStatement.setString(2, slotId);
+			ResultSet rs = preparedStatement.executeQuery();
+			while(rs.next()){
+				return rs.getString("bookingId");
+			}
+		} catch (SQLException e) {
+//            printSQLException(e);
+		}
+		return "";
 	}
 
 	// checks if the slot is already booked by the customer

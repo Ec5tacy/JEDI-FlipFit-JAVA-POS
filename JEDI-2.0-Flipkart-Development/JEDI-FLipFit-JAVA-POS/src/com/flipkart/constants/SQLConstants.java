@@ -52,9 +52,11 @@ public class SQLConstants {
 	public static final String SQL_APPROVE_ALL_GYMS = "update gym set isVerified=1 WHERE isVerified=0;";
 
 	public static final String SQL_SELECT_SLOTS_BY_GYM = "Select * From slot Where gymId=?;";
-	public static final String SQL_SELECT_BOOKED_SLOTS_BY_CUSTOMER = "Select * From booking where customerEmail = ?;";
+	public static final String SQL_SELECT_BOOKED_SLOTS_BY_CUSTOMER = "Select * From booking WHERE customerEmail=?;";
 	public static final String SQL_INSERT_BOOKING = "INSERT INTO booking (bookingId,slotId,gymId,type,date,customerEmail) values(?, ?, ?, ?, ?, ?);";
 	public static final String SQL_CHECK_FULL_SLOT = "Select * from slot where slotId=? and (numOfSeatsBooked>=numOfSeats);";
+
+	public static final String SQL_SELECT_BOOKING_ID = "Select * from booking where customerEmail=? and slotId=?;";
 	public static final String SQL_CHECK_ALREADY_BOOKED = "select type from booking where slotId=? and customerEmail = ?;";
 	public static final String SQL_DELETE_BOOKING = "Delete from booking where customerEmail = ? and bookingId = ?;";
 	public static final String SQL_CHECK_SLOT_EXISTS = "select isVerified from slot where slotId=? and gymId = ?;";

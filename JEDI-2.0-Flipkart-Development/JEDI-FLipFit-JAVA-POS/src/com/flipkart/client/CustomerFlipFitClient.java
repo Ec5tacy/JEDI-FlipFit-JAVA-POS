@@ -9,6 +9,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.flipkart.DAO.UserFlipFitDAOImpl;
+import com.flipkart.bean.Booking;
 import com.flipkart.bean.Customer;
 import com.flipkart.bean.Gym;
 import com.flipkart.bean.Slot;
@@ -19,6 +20,9 @@ import com.flipkart.service.CustomerFlipFitServiceImpl;
 import com.flipkart.service.UserFlipFitServiceImpl;
 import com.flipkart.exception.SlotNotFoundException;
 import com.flipkart.exception.UserAlreadyExistsException;
+import com.flipkart.validator.DateFlipfitValidator;
+import com.flipkart.validator.EmailFlipfitValidator;
+import com.flipkart.validator.LengthFlipfitValidator;
 
 import static com.flipkart.constants.ColorConstants.CYAN;
 
@@ -33,13 +37,11 @@ public class CustomerFlipFitClient {
 		System.out.println(ColorConstants.BOLD_TEXT+ ColorConstants.YELLOW+"                CUSTOMER REGISTRATION             "+ColorConstants.RESET);
 		System.out.println(ColorConstants.BLUE+"============================================="+ColorConstants.RESET);
 		String email="",phoneNo="";
-		String regex = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$";
-		Pattern pattern = Pattern.compile(regex);
-		Matcher m = pattern.matcher(email);
-		while(!m.matches()){
-			System.out.print(ColorConstants.BOLD_TEXT+ ColorConstants.CYAN+"Enter Email: "+ColorConstants.RESET);
+		boolean isEmailCorrect=false;
+		while(isEmailCorrect==false){
+			System.out.print("Enter Email: ");
 			email = sc.next();
-			m = pattern.matcher(email);
+			isEmailCorrect = EmailFlipfitValidator.isEmailCorrect(email);
 		}
 		customer.setEmail(email);
 		System.out.print(ColorConstants.BOLD_TEXT+ ColorConstants.CYAN+"Enter password: "+ColorConstants.RESET);
@@ -47,9 +49,9 @@ public class CustomerFlipFitClient {
 		customer.setRoleId("Customer");
 		System.out.print(ColorConstants.BOLD_TEXT+ ColorConstants.CYAN+"Enter Name: "+ColorConstants.RESET);
 		customer.setName(sc.next());
-		while(phoneNo.length()!=10){
-			if(!phoneNo.isEmpty())System.out.println(ColorConstants.BOLD_TEXT+ ColorConstants.RED+"Invalid Phone number!"+ColorConstants.RESET);
-			System.out.print(ColorConstants.BOLD_TEXT+ ColorConstants.CYAN+"Enter Phone Number:"+ColorConstants.RESET);
+		while(!LengthFlipfitValidator.isLengthCorrect(phoneNo,10)){
+			if(!phoneNo.isEmpty())System.out.println("Invalid Phone number");
+			System.out.println("Enter Phone Number");
 			phoneNo = sc.next();
 		}
 		customer.setPhoneNumber(phoneNo);
@@ -99,22 +101,7 @@ public class CustomerFlipFitClient {
 		System.out.println(ColorConstants.BOLD_TEXT+ ColorConstants.BLUE+"=========================================================================="+ColorConstants.RESET);
 //		n______________________");
 	}
-	public static boolean isValidFutureDate(String inputDate) {
-		try {
-			// Parse the input date
-			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-			LocalDate date = LocalDate.parse(inputDate, formatter);
 
-			// Get today's date
-			LocalDate currentDate = LocalDate.now();
-
-			// Check if the parsed date is today or in the future
-			return !date.isBefore(currentDate);
-		} catch (Exception e) {
-			// Handle parsing errors or invalid date format
-			return false;
-		}
-	}
 
 
 	public void viewGyms(String email) throws ParseException, SlotNotFoundException {
@@ -126,7 +113,7 @@ public class CustomerFlipFitClient {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		Date date = dateFormat.parse(dateStr);
 
-		if (isValidFutureDate(dateStr)) {
+		if (DateFlipfitValidator.isValidFutureDate(dateStr)) {
 			System.out.println(ColorConstants.BOLD_TEXT+ ColorConstants.CYAN+"The entered date is valid."+ColorConstants.RESET);
 		} else {
 			System.out.println(ColorConstants.BOLD_TEXT+ ColorConstants.RED+"Invalid date."+ColorConstants.BOLD_TEXT+ ColorConstants.CYAN+" Please enter today's date or a future date."+ColorConstants.RESET);

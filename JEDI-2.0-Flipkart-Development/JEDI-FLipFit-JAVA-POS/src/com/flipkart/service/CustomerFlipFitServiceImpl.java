@@ -59,7 +59,11 @@ public class CustomerFlipFitServiceImpl implements CustomerFlipFitServiceInterfa
 	 */
 	public List<Booking> getBookings(String email) {
 		System.out.println(ColorConstants.GREEN+"Successfully fetched the list of bookings"+ColorConstants.RESET);
-		return customerDAO.fetchBookedSlots(email);
+		List<Booking> bookings = customerDAO.fetchBookedSlots(email);
+		for(Booking booking : bookings){
+			System.out.println(booking.getBookingId());
+		}
+		return bookings;
 	}
 	/**
 	 * Performs booking cancellation operation for the given customer email.
@@ -107,23 +111,24 @@ public class CustomerFlipFitServiceImpl implements CustomerFlipFitServiceInterfa
 		if(customerDAO.alreadyBooked(slotId, email, date))
 		{
 			//System.out.println("entered already booked");
-			customerDAO.cancelBooking(slotId, email);
-			customerDAO.updateNumOfSeats(slotId,bookedSeatsNum--);
+			String bookingId = customerDAO.getBookingId(email,slotId);
+			customerDAO.cancelBooking(bookingId, email);
+			customerDAO.updateNumOfSeats(slotId,bookedSeatsNum-1);
 			if(bookedSeatsNum<totalSeatsNum)
 			{
-				customerDAO.updateNumOfSeats(slotId,bookedSeatsNum++);
+				customerDAO.updateNumOfSeats(slotId,bookedSeatsNum+1);
 				customerDAO.bookSlots(IdGenerator.generateId("Booking"), slotId, gymId,"confirmed",date,email);
 			}
 			else
 			{
-				customerDAO.updateNumOfSeats(slotId,bookedSeatsNum++);
+				customerDAO.updateNumOfSeats(slotId,bookedSeatsNum+1);
 				customerDAO.bookSlots(IdGenerator.generateId("Booking"), slotId, gymId,"waitlisted",date,email);
 			}
 			return 0;
 		}
 		if(customerDAO.isFull(slotId, date))
 		{
-			customerDAO.updateNumOfSeats(slotId,bookedSeatsNum++);
+			customerDAO.updateNumOfSeats(slotId,bookedSeatsNum+1);
 			customerDAO.bookSlots(IdGenerator.generateId("Booking"), slotId, gymId,"waitlisted",date,email);
 			return 1;
 		}
@@ -131,12 +136,12 @@ public class CustomerFlipFitServiceImpl implements CustomerFlipFitServiceInterfa
 		{
 			if(bookedSeatsNum<totalSeatsNum)
 			{
-				customerDAO.updateNumOfSeats(slotId,bookedSeatsNum++);
+				customerDAO.updateNumOfSeats(slotId,bookedSeatsNum+1);
 				customerDAO.bookSlots(IdGenerator.generateId("Booking"), slotId, gymId,"confirmed",date,email);
 			}
 			else
 			{
-				customerDAO.updateNumOfSeats(slotId,bookedSeatsNum++);
+				customerDAO.updateNumOfSeats(slotId,bookedSeatsNum+1);
 				customerDAO.bookSlots(IdGenerator.generateId("Booking"), slotId, gymId,"waitlisted",date,email);
 			}
 			return 2;
