@@ -27,7 +27,7 @@ private static Connection connection = null;
             try {
             	Properties prop = new Properties();
                 //InputStream inputStream = DBUtils.class.getClassLoader().getResourceAsStream("./config.properties");
-            	FileInputStream fileInputStream = new FileInputStream("/Users/ishaan.srivastava/JEDI-FlipFit-JAVA-POS/JEDI-2.0-Flipkart-Development/JEDI-FLipFit-JAVA-POS/src/config.properties");
+            	FileInputStream fileInputStream = new FileInputStream("/Users/aashna.chourasia/JEDI-FlipFit-JAVA-POS/JEDI-2.0-Flipkart-Development/JEDI-FLipFit-JAVA-POS/src/config.properties");
                 prop.load(fileInputStream);
                 //String driver = prop.getProperty("driver");
                 String url = prop.getProperty("url");

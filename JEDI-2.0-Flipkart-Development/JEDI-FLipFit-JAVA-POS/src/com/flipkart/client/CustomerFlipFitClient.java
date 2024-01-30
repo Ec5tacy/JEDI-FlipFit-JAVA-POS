@@ -19,6 +19,9 @@ import com.flipkart.service.CustomerFlipFitServiceImpl;
 import com.flipkart.service.UserFlipFitServiceImpl;
 import com.flipkart.exception.SlotNotFoundException;
 import com.flipkart.exception.UserAlreadyExistsException;
+import com.flipkart.validator.DateFlipfitValidator;
+import com.flipkart.validator.EmailFlipfitValidator;
+import com.flipkart.validator.LengthFlipfitValidator;
 
 public class CustomerFlipFitClient {
 
@@ -31,13 +34,11 @@ public class CustomerFlipFitClient {
 		System.out.println("            Customer Registration         ");
 		System.out.println("==========================================");
 		String email="",phoneNo="";
-		String regex = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$";
-		Pattern pattern = Pattern.compile(regex);
-		Matcher m = pattern.matcher(email);
-		while(!m.matches()){
+		boolean isEmailCorrect=false;
+		while(isEmailCorrect==false){
 			System.out.print("Enter Email: ");
 			email = sc.next();
-			m = pattern.matcher(email);
+			isEmailCorrect = EmailFlipfitValidator.isEmailCorrect(email);
 		}
 		customer.setEmail(email);
 		System.out.print("Enter password: ");
@@ -45,7 +46,7 @@ public class CustomerFlipFitClient {
 		customer.setRoleId("Customer");
 		System.out.print("Enter Name: ");
 		customer.setName(sc.next());
-		while(phoneNo.length()!=10){
+		while(!LengthFlipfitValidator.isLengthCorrect(phoneNo,10)){
 			if(!phoneNo.isEmpty())System.out.println("Invalid Phone number");
 			System.out.println("Enter Phone Number");
 			phoneNo = sc.next();
@@ -97,22 +98,7 @@ public class CustomerFlipFitClient {
 		System.out.println("\n______________________");
 //		n______________________");
 	}
-	public static boolean isValidFutureDate(String inputDate) {
-		try {
-			// Parse the input date
-			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-			LocalDate date = LocalDate.parse(inputDate, formatter);
 
-			// Get today's date
-			LocalDate currentDate = LocalDate.now();
-
-			// Check if the parsed date is today or in the future
-			return !date.isBefore(currentDate);
-		} catch (Exception e) {
-			// Handle parsing errors or invalid date format
-			return false;
-		}
-	}
 
 
 	public void viewGyms(String email) throws ParseException, SlotNotFoundException {
@@ -124,7 +110,7 @@ public class CustomerFlipFitClient {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		Date date = dateFormat.parse(dateStr);
 
-		if (isValidFutureDate(dateStr)) {
+		if (DateFlipfitValidator.isValidFutureDate(dateStr)) {
 			System.out.println("The entered date is valid and in the future.");
 		} else {
 			System.out.println("Invalid date. Please enter today's date or a future date.");

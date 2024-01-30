@@ -19,6 +19,8 @@ import com.flipkart.exception.UnauthorizedAccessException;
 import com.flipkart.exception.UserAlreadyExistsException;
 import com.flipkart.utils.IdGenerator;
 import com.flipkart.DAO.UserFlipFitDAOImpl;
+import com.flipkart.validator.EmailFlipfitValidator;
+import com.flipkart.validator.LengthFlipfitValidator;
 
 public class GymOwnerFlipFitClient {
 
@@ -32,13 +34,11 @@ public class GymOwnerFlipFitClient {
 		System.out.println("==========================================");
 		System.out.println("\nEnter Gym Owner Details: \n");
 		String aadhar="",email="",phoneNo="",pan="";
-		String regex = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$";
-		Pattern pattern = Pattern.compile(regex);
-		Matcher m = pattern.matcher(email);
-		while(!m.matches()){
+		boolean isEmailCorrect=false;
+		while(isEmailCorrect==false){
 			System.out.print("Enter Email: ");
 			email = in.next();
-			m = pattern.matcher(email);
+			isEmailCorrect = EmailFlipfitValidator.isEmailCorrect(email);
 		}
 		gymOwner.setEmail(email);
 
@@ -48,20 +48,20 @@ public class GymOwnerFlipFitClient {
 		System.out.print("Enter Name: ");
 		gymOwner.setName(in.next());
 
-		while(phoneNo.length()!=10){
+		while(!LengthFlipfitValidator.isLengthCorrect(phoneNo,10)){
 			if(!phoneNo.isEmpty())System.out.println("Invalid Phone number");
 			System.out.println("Enter Phone Number");
 			phoneNo = in.next();
 		}
 		gymOwner.setPhoneNumber(phoneNo);
 
-		while(aadhar.length()!=12){
+		while(!LengthFlipfitValidator.isLengthCorrect(aadhar,12)){
 			if(!aadhar.isEmpty())System.out.println("Invalid Aadhaar Number");
 			System.out.println("Enter Aadhaar Number");
 			aadhar = in.next();
 		}
 		gymOwner.setAadharNumber(aadhar);
-		while(pan.length()!=10){
+		while(!LengthFlipfitValidator.isLengthCorrect(pan,10)){
 			if(!pan.isEmpty())System.out.println("Invalid PAN Number");
 			System.out.println("Enter PAN Number");
 			pan = in.next();
