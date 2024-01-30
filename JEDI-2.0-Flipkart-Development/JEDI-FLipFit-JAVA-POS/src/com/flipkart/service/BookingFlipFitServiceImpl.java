@@ -24,17 +24,21 @@ import java.util.Date;
 	 */
 	public boolean isConfirmed(String bookingId) {
 
-		for(Booking b:bookings)
-		{
-			if(b.getBookingId().equals(bookingId))
-			{
-				if(b.getType()=="confirmed")
-					return true;
-				else
-					return false;
-			}
-		}
-		return false;
+//		for(Booking b:bookings)
+//		{
+//			if(b.getBookingId().equals(bookingId))
+//			{
+//				if(b.getType()=="confirmed")
+//					return true;
+//				else
+//					return false;
+//			}
+//		}
+//		return false;
+
+		return bookings.stream()
+				.filter(b -> b.getBookingId().equals(bookingId))
+				.anyMatch(b -> "confirmed".equals(b.getType()));
 	}
 	/**
 	 * Gives a size of wait listed customers.
