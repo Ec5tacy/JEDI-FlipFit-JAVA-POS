@@ -20,6 +20,8 @@ import com.flipkart.service.UserFlipFitServiceImpl;
 import com.flipkart.exception.SlotNotFoundException;
 import com.flipkart.exception.UserAlreadyExistsException;
 
+import static com.flipkart.constants.ColorConstants.CYAN;
+
 public class CustomerFlipFitClient {
 
 	Customer customer = new Customer();
@@ -27,38 +29,38 @@ public class CustomerFlipFitClient {
 	Scanner sc = new Scanner(System.in);
 
 	public void registerCustomer() throws UserAlreadyExistsException {
-		System.out.println("==========================================");
-		System.out.println("            Customer Registration         ");
-		System.out.println("==========================================");
+		System.out.println(ColorConstants.BLUE+"============================================="+ColorConstants.RESET);
+		System.out.println(ColorConstants.BOLD_TEXT+ ColorConstants.YELLOW+"                CUSTOMER REGISTRATION             "+ColorConstants.RESET);
+		System.out.println(ColorConstants.BLUE+"============================================="+ColorConstants.RESET);
 		String email="",phoneNo="";
 		String regex = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$";
 		Pattern pattern = Pattern.compile(regex);
 		Matcher m = pattern.matcher(email);
 		while(!m.matches()){
-			System.out.print("Enter Email: ");
+			System.out.print(ColorConstants.BOLD_TEXT+ ColorConstants.CYAN+"Enter Email: "+ColorConstants.RESET);
 			email = sc.next();
 			m = pattern.matcher(email);
 		}
 		customer.setEmail(email);
-		System.out.print("Enter password: ");
+		System.out.print(ColorConstants.BOLD_TEXT+ ColorConstants.CYAN+"Enter password: "+ColorConstants.RESET);
 		customer.setPassword(sc.next());
 		customer.setRoleId("Customer");
-		System.out.print("Enter Name: ");
+		System.out.print(ColorConstants.BOLD_TEXT+ ColorConstants.CYAN+"Enter Name: "+ColorConstants.RESET);
 		customer.setName(sc.next());
 		while(phoneNo.length()!=10){
-			if(!phoneNo.isEmpty())System.out.println("Invalid Phone number");
-			System.out.println("Enter Phone Number");
+			if(!phoneNo.isEmpty())System.out.println(ColorConstants.BOLD_TEXT+ ColorConstants.RED+"Invalid Phone number!"+ColorConstants.RESET);
+			System.out.print(ColorConstants.BOLD_TEXT+ ColorConstants.CYAN+"Enter Phone Number:"+ColorConstants.RESET);
 			phoneNo = sc.next();
 		}
 		customer.setPhoneNumber(phoneNo);
-		System.out.print("Enter Age: ");
+		System.out.print(ColorConstants.BOLD_TEXT+ ColorConstants.CYAN+"Enter Age: "+ColorConstants.RESET);
 		customer.setAge(Integer.valueOf(sc.next()));
-		System.out.print("Enter Address: ");
+		System.out.print(ColorConstants.BOLD_TEXT+ ColorConstants.CYAN+"Enter Address: "+ColorConstants.RESET);
 		customer.setAddress(sc.next());
 		UserFlipFitServiceImpl userBusiness = new UserFlipFitServiceImpl();
 		userBusiness.registerCustomer(customer);
 
-		System.out.println("Customer registered successfully!");
+		System.out.println(ColorConstants.BOLD_TEXT+ ColorConstants.GREEN+"Customer registered successfully!"+ColorConstants.RESET);
 
 	}
 
@@ -88,13 +90,13 @@ public class CustomerFlipFitClient {
 			System.out.println(ColorConstants.RED + e.getMessage() + ColorConstants.RESET);
 			return;
 		}
-		System.out.println("______________________");
-		System.out.printf("%15s%15s%15s%15s", "Customer Name", "Phone Number", "Address", "Age");
+		System.out.println(ColorConstants.BOLD_TEXT+ ColorConstants.BLUE+"=========================================================================="+ColorConstants.RESET);
+		System.out.printf(ColorConstants.BOLD_TEXT+ ColorConstants.YELLOW+"%15s%15s%15s%15s", "Customer Name", "Phone Number", "Address", "Age"+ColorConstants.RESET);
 		System.out.println();
-		System.out.printf("%15s%15s%15s%15s", customer.getName(), customer.getPhoneNumber(), customer.getAddress(),
-				customer.getAge());
+		System.out.printf(ColorConstants.BOLD_TEXT+ ColorConstants.CYAN+"%15s%15s%15s%15s", customer.getName(), customer.getPhoneNumber(), customer.getAddress(),
+				customer.getAge()+ColorConstants.RESET);
 		System.out.println();
-		System.out.println("\n______________________");
+		System.out.println(ColorConstants.BOLD_TEXT+ ColorConstants.BLUE+"=========================================================================="+ColorConstants.RESET);
 //		n______________________");
 	}
 	public static boolean isValidFutureDate(String inputDate) {
@@ -117,17 +119,17 @@ public class CustomerFlipFitClient {
 
 	public void viewGyms(String email) throws ParseException, SlotNotFoundException {
 		getGyms();
-		System.out.print("Enter Gym ID: ");
+		System.out.print(ColorConstants.BOLD_TEXT+ ColorConstants.CYAN+"Enter Gym ID: "+ColorConstants.RESET);
 		String gymId = sc.next();
-		System.out.print("Enter Date (yyyy-mm-dd): ");
+		System.out.print(ColorConstants.BOLD_TEXT+ ColorConstants.CYAN+"Enter Date (yyyy-mm-dd): "+ColorConstants.RESET);
 		String dateStr = sc.next();
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		Date date = dateFormat.parse(dateStr);
 
 		if (isValidFutureDate(dateStr)) {
-			System.out.println("The entered date is valid and in the future.");
+			System.out.println(ColorConstants.BOLD_TEXT+ ColorConstants.CYAN+"The entered date is valid."+ColorConstants.RESET);
 		} else {
-			System.out.println("Invalid date. Please enter today's date or a future date.");
+			System.out.println(ColorConstants.BOLD_TEXT+ ColorConstants.RED+"Invalid date."+ColorConstants.BOLD_TEXT+ ColorConstants.CYAN+" Please enter today's date or a future date."+ColorConstants.RESET);
 		}
 
 //		List<Slot> slots = customerBusiness.getSlotInGym(gymId);
@@ -137,37 +139,37 @@ public class CustomerFlipFitClient {
 //		}
 		List<Slot> slots = customerBusiness.getSlotInGym(gymId);
 		slots.forEach(slot -> {
-			System.out.print("Slot Id: " + slot.getSlotId());
-			System.out.print("Availability: " + customerBusiness.isSlotBooked(slot.getSlotId(), String.valueOf(date)));
+			System.out.print(ColorConstants.BOLD_TEXT+ ColorConstants.CYAN+"Slot Id: " + slot.getSlotId()+ColorConstants.RESET);
+			System.out.print(ColorConstants.BOLD_TEXT+ ColorConstants.CYAN+"Availability: " + customerBusiness.isSlotBooked(slot.getSlotId(), String.valueOf(date))+ColorConstants.RESET);
 			System.out.println(); // Add a newline for better readability between slots
 		});
 
-		System.out.print("Enter the slot ID which you want to book: ");
+		System.out.print(ColorConstants.BOLD_TEXT+ ColorConstants.CYAN+"Enter the slot ID which you want to book: "+ColorConstants.RESET);
 		String slotId = sc.next();
 		int bookingResponse = customerBusiness.bookSlot(gymId,slotId, email, String.valueOf(date));
 		switch (bookingResponse) {
 			case 0:
-				System.out.println("You have already booked this time. Cancelling the previous one and booking this slot");
+				System.out.println(ColorConstants.BOLD_TEXT+ ColorConstants.CYAN+"You have already booked this time. Cancelling the previous one and booking this slot"+ColorConstants.RESET);
 				break;
 			case 1:
-				System.out.println("Slot is already booked, added to the waiting list");
+				System.out.println(ColorConstants.BOLD_TEXT+ ColorConstants.CYAN+"Slot is already booked, added to the waiting list"+ColorConstants.RESET);
 				break;
 			case 2:
-				System.out.println("Successfully booked the slot");
+				System.out.println(ColorConstants.BOLD_TEXT+ ColorConstants.GREEN+"Successfully booked the slot"+ColorConstants.RESET);
 				break;
 			case 3:
-				System.out.println("Slot not found");
+				System.out.println(ColorConstants.BOLD_TEXT+ ColorConstants.RED+"Slot not found"+ColorConstants.RESET);
 				break;
 			default:
-				System.out.println("Booking failed");
+				System.out.println(ColorConstants.BOLD_TEXT+ ColorConstants.RED+"Booking failed"+ColorConstants.RESET);
 		}
 	}
 
 	public void editProfile(String email) throws CustomerNotFoundException {
-		System.out.println("==========================================");
-		System.out.println("              Edit Profile               ");
-		System.out.println("==========================================");
-		System.out.println("Want to change password? Yes/No");
+		System.out.println(ColorConstants.BLUE+"============================================="+ColorConstants.RESET);
+		System.out.println(ColorConstants.BOLD_TEXT+ ColorConstants.YELLOW+"                EDIT PROFILE             "+ColorConstants.RESET);
+		System.out.println(ColorConstants.BLUE+"============================================="+ColorConstants.RESET);
+		System.out.println(ColorConstants.BOLD_TEXT+ ColorConstants.CYAN+"Want to change password? Yes/No"+ColorConstants.RESET);
 		String choice = sc.next();
 		Customer customer = new Customer();
 		try{
@@ -182,43 +184,43 @@ public class CustomerFlipFitClient {
 
 			}
 		}catch (Error e){
-			System.out.println("Bad issue");
+			System.out.println(ColorConstants.RED+"Bad issue"+ColorConstants.RESET);
 		}
 
 		try{
 			UserFlipFitDAOImpl u1 = new UserFlipFitDAOImpl();
 			customer.setPassword(u1.getPassword(customer.getEmail()));
 		}catch (Error e){
-			System.out.println("Bad issue");
+			System.out.println(ColorConstants.RED+"Bad issue"+ColorConstants.RESET);
 			return ;
 		}
 
 		if(choice.equals("Yes")){
-			System.out.print("Enter Password: ");
+			System.out.print(ColorConstants.BOLD_TEXT+ ColorConstants.CYAN+"Enter Password: "+ColorConstants.RESET);
 			customer.setPassword(sc.next());
 		}
-		System.out.println("Want to change name? Yes/No");
+		System.out.println(ColorConstants.BOLD_TEXT+ ColorConstants.CYAN+"Want to change name? Yes/No"+ColorConstants.RESET);
 		choice = sc.next();
 		if(choice.equals("Yes")) {
-			System.out.print("Enter Name: ");
+			System.out.print(ColorConstants.BOLD_TEXT+ ColorConstants.CYAN+"Enter Name: ");
 			customer.setName(sc.next());
 		}
-		System.out.println("Want to change phone number? Yes/No");
+		System.out.println(ColorConstants.BOLD_TEXT+ ColorConstants.BLUE+"Want to change phone number? Yes/No"+ColorConstants.RESET);
 		choice = sc.next();
 		if(choice.equals("Yes")) {
-			System.out.print("Enter Phone Number: ");
+			System.out.print(ColorConstants.BOLD_TEXT+ CYAN+"Enter Phone Number: "+ColorConstants.RESET);
 			customer.setPhoneNumber(sc.next());
 		}
-		System.out.println("Want to change age? Yes/No");
+		System.out.println(ColorConstants.BOLD_TEXT+ ColorConstants.BLUE+"Want to change age? Yes/No"+ColorConstants.RESET);
 		choice = sc.next();
 		if(choice.equals("Yes")) {
-			System.out.print("Enter Age: ");
+			System.out.print(ColorConstants.BOLD_TEXT+ ColorConstants.CYAN+"Enter Age: "+ColorConstants.RESET);
 			customer.setAge(Integer.valueOf(sc.next()));
 		}
-		System.out.println("Want to change address? Yes/No");
+		System.out.println(ColorConstants.BOLD_TEXT+ ColorConstants.BLUE+"Want to change address? Yes/No"+ColorConstants.RESET);
 		choice = sc.next();
 		if(choice.equals("Yes")) {
-			System.out.print("Enter Address: ");
+			System.out.print(ColorConstants.BOLD_TEXT+ ColorConstants.CYAN+"Enter Address: "+ColorConstants.RESET);
 			customer.setAddress(sc.next());
 		}
 		try{
@@ -226,14 +228,14 @@ public class CustomerFlipFitClient {
 		}catch (Error e){
 			return ;
 		}
-		System.out.println("Successfully edited your profile");
+		System.out.println(ColorConstants.BOLD_TEXT+ ColorConstants.GREEN+"Successfully edited your profile"+ColorConstants.RESET);
 	}
 
 	public void getGyms() {
-		System.out.print("Enter your city: ");
+		System.out.print(ColorConstants.BOLD_TEXT+ ColorConstants.CYAN+"Enter your city: "+ColorConstants.RESET);
 		List<Gym> gyms = customerBusiness.getGymInCity(sc.next());
-		System.out.println("==========================================================================");
-		System.out.printf("%15s%20s%15s", "Gym Id", "Gym Owner Email", "Gym Name");
+		System.out.println(ColorConstants.BOLD_TEXT+ ColorConstants.BLUE+"=========================================================================="+ColorConstants.RESET);
+		System.out.printf(ColorConstants.BOLD_TEXT+ ColorConstants.YELLOW+"%15s%20s%15s", "Gym Id", "Gym Owner Email", "Gym Name"+ColorConstants.RESET);
 		System.out.println();
 //		for (Gym gym : gyms) {
 //			System.out.printf("%15s%20s%15s", gym.getGymId(), gym.getOwnerEmail(),gym.getGymName() );
@@ -242,9 +244,9 @@ public class CustomerFlipFitClient {
 //			System.out.println();
 //		}
 		gyms.forEach(gym -> {
-			System.out.printf("%15s%20s%15s", gym.getGymId(), gym.getOwnerEmail(), gym.getGymName());
+			System.out.printf(ColorConstants.BOLD_TEXT+ ColorConstants.CYAN+"%15s%20s%15s", gym.getGymId(), gym.getOwnerEmail(), gym.getGymName()+ColorConstants.RESET);
 			System.out.println();
-			System.out.println("==========================================================================");
+			System.out.println(ColorConstants.BOLD_TEXT+ ColorConstants.BLUE+"=========================================================================="+ColorConstants.RESET);
 			System.out.println();
 		});
 
@@ -254,10 +256,10 @@ public class CustomerFlipFitClient {
 
 
 	public void cancelBooking(String email) {
-		System.out.println("==========================================");
-		System.out.println("            Cancel Booking               ");
-		System.out.println("==========================================");
-		System.out.print("Enter booking ID that you want to cancel: ");
+		System.out.println(ColorConstants.BLUE+"============================================="+ColorConstants.RESET);
+		System.out.println(ColorConstants.BOLD_TEXT+ ColorConstants.YELLOW+"                CANCEL BOOKING             "+ColorConstants.RESET);
+		System.out.println(ColorConstants.BLUE+"============================================="+ColorConstants.RESET);
+		System.out.print(ColorConstants.BOLD_TEXT+ ColorConstants.CYAN+"Enter booking ID that you want to cancel: "+ColorConstants.RESET);
 		String bookingId = sc.next();
 		customerBusiness.cancelBooking(bookingId, email);
 	}
@@ -266,11 +268,11 @@ public class CustomerFlipFitClient {
 		int choice = 0;
 
 		while (choice != 6) {
-			System.out.println("==========================================");
-			System.out.println("                 Menu                    ");
-			System.out.println("==========================================");
-			System.out.println("1.View Gyms \n2.View Booked Slots \n3.Cancel Booked Slots \n4.Edit Profile \n5.View Profile \n6.Exit");
-			System.out.print("Enter your choice: ");
+			System.out.println(ColorConstants.BLUE+"============================================="+ColorConstants.RESET);
+			System.out.println(ColorConstants.BOLD_TEXT+ ColorConstants.YELLOW+"                MENU             "+ColorConstants.RESET);
+			System.out.println(ColorConstants.BLUE+"============================================="+ColorConstants.RESET);
+			System.out.println(ColorConstants.BOLD_TEXT+ ColorConstants.BLUE+"1.View Gyms \n2.View Booked Slots \n3.Cancel Booked Slots \n4.Edit Profile \n5.View Profile \n6.Exit"+ColorConstants.RESET);
+			System.out.print(ColorConstants.BOLD_TEXT+ ColorConstants.CYAN+"Enter your choice: "+ColorConstants.RESET);
 			choice = sc.nextInt();
 
 			switch (choice) {
@@ -291,7 +293,7 @@ public class CustomerFlipFitClient {
 				case 6:
 					break;
 				default:
-					System.out.println("Invalid choice!");
+					System.out.println(ColorConstants.BOLD_TEXT+ ColorConstants.RED+"Invalid choice!"+ColorConstants.RESET);
 			}
 		}
 	}

@@ -27,43 +27,43 @@ public class GymOwnerFlipFitClient {
 	UserFlipFitServiceImpl userBusiness = new UserFlipFitServiceImpl();
 
 	public void gymOwnerRegistration(Scanner in) throws UserAlreadyExistsException {
-		System.out.println("==========================================");
-		System.out.println("            Gym Owner Registration         ");
-		System.out.println("==========================================");
-		System.out.println("\nEnter Gym Owner Details: \n");
+		System.out.println(ColorConstants.BLUE+"============================================="+ColorConstants.RESET);
+		System.out.println(ColorConstants.BOLD_TEXT+ ColorConstants.YELLOW+"                GYM OWNER REGISTRATION             "+ColorConstants.RESET);
+		System.out.println(ColorConstants.BLUE+"============================================="+ColorConstants.RESET);
+		System.out.println(ColorConstants.BOLD_TEXT+ ColorConstants.CYAN+"\nEnter Gym Owner Details: \n");
 		String aadhar="",email="",phoneNo="",pan="";
 		String regex = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$";
 		Pattern pattern = Pattern.compile(regex);
 		Matcher m = pattern.matcher(email);
 		while(!m.matches()){
-			System.out.print("Enter Email: ");
+			System.out.print(ColorConstants.BOLD_TEXT+ ColorConstants.CYAN+"Enter Email: "+ColorConstants.RESET);
 			email = in.next();
 			m = pattern.matcher(email);
 		}
 		gymOwner.setEmail(email);
 
-		System.out.print("Enter Password: ");
+		System.out.print(ColorConstants.BOLD_TEXT+ ColorConstants.CYAN+"Enter Password: "+ColorConstants.RESET);
 		gymOwner.setPassword(in.next());
 		gymOwner.setRoleId("GymOwner");
-		System.out.print("Enter Name: ");
+		System.out.print(ColorConstants.BOLD_TEXT+ ColorConstants.CYAN+"Enter Name: "+ColorConstants.RESET);
 		gymOwner.setName(in.next());
 
 		while(phoneNo.length()!=10){
-			if(!phoneNo.isEmpty())System.out.println("Invalid Phone number");
-			System.out.println("Enter Phone Number");
+			if(!phoneNo.isEmpty())System.out.println(ColorConstants.BOLD_TEXT+ ColorConstants.RED+"Invalid Phone number"+ColorConstants.RESET);
+			System.out.println(ColorConstants.BOLD_TEXT+ ColorConstants.CYAN+"Enter Phone Number"+ColorConstants.RESET);
 			phoneNo = in.next();
 		}
 		gymOwner.setPhoneNumber(phoneNo);
 
 		while(aadhar.length()!=12){
-			if(!aadhar.isEmpty())System.out.println("Invalid Aadhaar Number");
-			System.out.println("Enter Aadhaar Number");
+			if(!aadhar.isEmpty())System.out.println(ColorConstants.BOLD_TEXT+ ColorConstants.RED+"Invalid Aadhaar Number"+ColorConstants.RESET);
+			System.out.println(ColorConstants.BOLD_TEXT+ ColorConstants.CYAN+"Enter Aadhaar Number"+ColorConstants.RESET);
 			aadhar = in.next();
 		}
 		gymOwner.setAadharNumber(aadhar);
 		while(pan.length()!=10){
-			if(!pan.isEmpty())System.out.println("Invalid PAN Number");
-			System.out.println("Enter PAN Number");
+			if(!pan.isEmpty())System.out.println(ColorConstants.BOLD_TEXT+ ColorConstants.RED+"Invalid PAN Number"+ColorConstants.RESET);
+			System.out.println(ColorConstants.BOLD_TEXT+ ColorConstants.CYAN+"Enter PAN Number"+ColorConstants.RESET);
 			pan = in.next();
 		}
 		gymOwner.setPanNumber(pan);
@@ -88,48 +88,48 @@ public class GymOwnerFlipFitClient {
 
 			gymOwner.setPassword(u1.getPassword(gymOwner.getEmail()));
 		}catch (Error e){
-			System.out.println("Bad issue");
+			System.out.println(ColorConstants.BOLD_TEXT+ ColorConstants.RED+"Bad issue"+ColorConstants.RESET);
 			return ;
 		}
 		Scanner sc = new Scanner(System.in);
-		System.out.println("==========================================");
-		System.out.println("              Edit Profile               ");
-		System.out.println("==========================================");
-		System.out.println("Want to change Email? Yes/No");
+		System.out.println(ColorConstants.BLUE+"============================================="+ColorConstants.RESET);
+		System.out.println(ColorConstants.BOLD_TEXT+ ColorConstants.YELLOW+"                EDIT PROFILE             "+ColorConstants.RESET);
+		System.out.println(ColorConstants.BLUE+"============================================="+ColorConstants.RESET);
+		System.out.println(ColorConstants.BOLD_TEXT+ ColorConstants.CYAN+"Want to change Email? Yes/No");
 		String choice = sc.next();
 		if(choice.equals("Yes")){
-			System.out.println("Enter Email: ");
+			System.out.println(ColorConstants.BOLD_TEXT+ ColorConstants.CYAN+"Enter Email: "+ColorConstants.RESET);
 			gymOwner.setEmail(email);
 		}
-		System.out.println("Want to change Password? Yes/No");
+		System.out.println(ColorConstants.BOLD_TEXT+ ColorConstants.CYAN+"Want to change Password? Yes/No"+ColorConstants.RESET);
 		choice = sc.next();
 		if(choice.equals("Yes")){
-			System.out.print("Enter Password: ");
+			System.out.print(ColorConstants.BOLD_TEXT+ ColorConstants.CYAN+"Enter Password: "+ColorConstants.RESET);
 			gymOwner.setPassword(in.next());
 		}
-		System.out.println("Want to change Name? Yes/No");
+		System.out.println(ColorConstants.BOLD_TEXT+ ColorConstants.CYAN+"Want to change Name? Yes/No"+ColorConstants.RESET);
 		choice = sc.next();
 		gymOwner.setRoleId("GymOwner");
 		if(choice.equals("Yes")){
-			System.out.print("Enter Name: ");
+			System.out.print(ColorConstants.BOLD_TEXT+ ColorConstants.CYAN+"Enter Name: "+ColorConstants.RESET);
 			gymOwner.setName(in.next());
 		}
-		System.out.println("Want to change Phone Number? Yes/No");
+		System.out.println(ColorConstants.BOLD_TEXT+ ColorConstants.CYAN+"Want to change Phone Number? Yes/No"+ColorConstants.RESET);
 		choice = sc.next();
 		if(choice.equals("Yes")) {
-			System.out.print("Enter Phone Number: ");
+			System.out.print(ColorConstants.BOLD_TEXT+ ColorConstants.CYAN+"Enter Phone Number: "+ColorConstants.RESET);
 			gymOwner.setPhoneNumber(in.next());
 		}
-		System.out.println("Want to change PAN Number? Yes/No");
+		System.out.println(ColorConstants.BOLD_TEXT+ ColorConstants.CYAN+"Want to change PAN Number? Yes/No"+ColorConstants.RESET);
 		choice = sc.next();
 		if(choice.equals("Yes")) {
-			System.out.print("Enter PAN Number: ");
+			System.out.print(ColorConstants.BOLD_TEXT+ ColorConstants.CYAN+"Enter PAN Number: "+ColorConstants.RESET);
 			gymOwner.setPanNumber(in.next());
 		}
-		System.out.println("Want to change Aadhar Number? Yes/No");
+		System.out.println(ColorConstants.BOLD_TEXT+ ColorConstants.CYAN+"Want to change Aadhar Number? Yes/No"+ColorConstants.RESET);
 		choice = sc.next();
 		if(choice.equals("Yes")) {
-			System.out.print("Enter Aadhaar Number: ");
+			System.out.print(ColorConstants.BOLD_TEXT+ ColorConstants.CYAN+"Enter Aadhaar Number: "+ColorConstants.RESET);
 			gymOwner.setAadharNumber(in.next());
 		}
 		try {
@@ -148,33 +148,34 @@ public class GymOwnerFlipFitClient {
 			System.out.println(ColorConstants.RED + e.getMessage() + ColorConstants.RESET);
 			return;
 		}
-		System.out.println("==========================================================================");
-		System.out.printf("%15s%15s%15s%20s", "Gym Owner Name", "Phone Number", "PAN Number", "Aadhaar Number");
+		System.out.println(ColorConstants.BOLD_TEXT+ ColorConstants.BLUE+"=========================================================================="+ColorConstants.RESET);
+		System.out.printf(ColorConstants.BOLD_TEXT+ ColorConstants.YELLOW+"%15s%15s%15s%20s", "Gym Owner Name", "Phone Number", "PAN Number", "Aadhaar Number"+ColorConstants.RESET);
+		System.out.println(ColorConstants.BOLD_TEXT+ ColorConstants.BLUE+"\n=========================================================================="+ColorConstants.RESET);
 		System.out.println();
-		System.out.printf("%15s%15s%15s%20s", gymOwner.getName(), gymOwner.getPhoneNumber(), gymOwner.getPanNumber(),
+		System.out.printf(ColorConstants.BOLD_TEXT+ ColorConstants.BLUE+"%15s%15s%15s%20s", gymOwner.getName(), gymOwner.getPhoneNumber(), gymOwner.getPanNumber(),
 				gymOwner.getAadharNumber());
 		System.out.println();
-		System.out.println("\n==========================================================================");
+		System.out.println(ColorConstants.BOLD_TEXT+ ColorConstants.BLUE+"\n=========================================================================="+ColorConstants.RESET);
 	}
 
 	public void addGym(Scanner in, String email) {
-		System.out.println("Please Enter Gym Details ");
+		System.out.println(ColorConstants.BOLD_TEXT+ ColorConstants.CYAN+"Please Enter Gym Details "+ColorConstants.RESET);
 
 		Gym gym = new Gym();
 		gym.setGymId(IdGenerator.generateId("Gym"));
-		System.out.print("Gym Name: ");
+		System.out.print(ColorConstants.BOLD_TEXT+ ColorConstants.CYAN+"Gym Name: "+ColorConstants.RESET);
 		gym.setGymName(in.next());
 		gym.setOwnerEmail(email);
-		System.out.print("Address: ");
+		System.out.print(ColorConstants.BOLD_TEXT+ ColorConstants.CYAN+"Address: "+ColorConstants.RESET);
 		gym.setAddress(in.next());
-		System.out.print("Slot Count: ");
+		System.out.print(ColorConstants.BOLD_TEXT+ ColorConstants.CYAN+"Slot Count: "+ColorConstants.RESET);
 		try {
 			gym.setSlotCount(in.nextInt());
 		} catch (InputMismatchException e) {
 			System.out.println(ColorConstants.RED + e.getMessage() + ColorConstants.RESET);
 			return;
 		}
-		System.out.print("SeatsPerSlotCount: ");
+		System.out.print(ColorConstants.BOLD_TEXT+ ColorConstants.CYAN+"SeatsPerSlotCount: "+ColorConstants.RESET);
 		gym.setSeatsPerSlotCount(in.nextInt());
 		gym.setVerified(false);
 
@@ -182,7 +183,7 @@ public class GymOwnerFlipFitClient {
 	}
 
 	public void editGym(Scanner in, String email) throws GymNotFoundException {
-		System.out.println("Please Enter Gym Details ");
+		System.out.println(ColorConstants.BOLD_TEXT+ ColorConstants.CYAN+"Please Enter Gym Details "+ColorConstants.RESET);
 		Scanner sc = new Scanner(System.in);
 		Gym gym = new Gym();
 //		System.out.println("Want to change Email? Yes/No");
@@ -193,7 +194,7 @@ public class GymOwnerFlipFitClient {
 //		}
 		String choice;
 
-		System.out.println("Enter Gym Id: ");
+		System.out.println(ColorConstants.BOLD_TEXT+ ColorConstants.CYAN+"Enter Gym Id: "+ColorConstants.RESET);
 		gym.setGymId(in.next());
 		Gym existingGym = gymOwnerBusiness.getGymById(gym.getGymId());
 
@@ -207,30 +208,30 @@ public class GymOwnerFlipFitClient {
 			gym.setGymId(existingGym.getGymId());
 			gym.setOwnerEmail(existingGym.getOwnerEmail());
 		}
-		System.out.println("Want to change Gym Name? Yes/No");
+		System.out.println(ColorConstants.BOLD_TEXT+ ColorConstants.CYAN+"Want to change Gym Name? Yes/No"+ColorConstants.RESET);
 		choice = sc.next();
 		if(choice.equals("Yes")){
-			System.out.println("Enter Gym Name: ");
+			System.out.println(ColorConstants.BOLD_TEXT+ ColorConstants.CYAN+"Enter Gym Name: "+ColorConstants.RESET);
 			gym.setGymName(in.next());
 			gym.setOwnerEmail(email);
 		}
-		System.out.println("Want to change Address? Yes/No");
+		System.out.println(ColorConstants.BOLD_TEXT+ ColorConstants.CYAN+"Want to change Address? Yes/No"+ColorConstants.RESET);
 		choice = sc.next();
 		if(choice.equals("Yes")){
-			System.out.println("Enter Address: ");
+			System.out.println(ColorConstants.BOLD_TEXT+ ColorConstants.CYAN+"Enter Address: "+ColorConstants.RESET);
 			gym.setAddress(in.next());
 		}
 //
-		System.out.println("Want to change Slot Count? Yes/No");
+		System.out.println(ColorConstants.BOLD_TEXT+ ColorConstants.CYAN+"Want to change Slot Count? Yes/No"+ColorConstants.RESET);
 		choice = sc.next();
 		if(choice.equals("Yes")) {
-			System.out.println("Enter SlotCount: ");
+			System.out.println(ColorConstants.BOLD_TEXT+ ColorConstants.CYAN+"Enter SlotCount: "+ColorConstants.RESET);
 			try {
 				gym.setSlotCount(in.nextInt());
-				System.out.println("Want to change Seats Per Slot Count? Yes/No");
+				System.out.println(ColorConstants.BOLD_TEXT+ ColorConstants.CYAN+"Want to change Seats Per Slot Count? Yes/No"+ColorConstants.RESET);
 				choice = sc.next();
 				if (choice.equals("Yes")) {
-					System.out.print("Enter SeatsPerSlotCount: ");
+					System.out.print(ColorConstants.BOLD_TEXT+ ColorConstants.CYAN+"Enter SeatsPerSlotCount: "+ColorConstants.RESET);
 					gym.setSeatsPerSlotCount(in.nextInt());
 				}
 			} catch (InputMismatchException e) {
@@ -255,39 +256,40 @@ public class GymOwnerFlipFitClient {
 			System.out.println(ColorConstants.RED + "Sorry, no gyms found!" + ColorConstants.RESET);
 			return;
 		}
-		System.out.println("=================================================================================================");
+		System.out.println(ColorConstants.BOLD_TEXT+ ColorConstants.BLUE+"================================================================================================="+ColorConstants.RESET);
 		System.out.println();
-		System.out.printf("%15s%15s%15s%15s%15s%15s", "Gym Id", "Gym Name", "Address", "SlotCount", "SeatsPerSlot", "Verification");
+		System.out.printf(ColorConstants.BOLD_TEXT+ ColorConstants.YELLOW+"%15s%15s%15s%15s%15s%15s", "Gym Id", "Gym Name", "Address", "SlotCount", "SeatsPerSlot", "Verification"+ColorConstants.RESET);
+		System.out.println(ColorConstants.BOLD_TEXT+ ColorConstants.BLUE+"================================================================================================="+ColorConstants.RESET);
 		gymDetails.forEach(gym -> {
 			System.out.println();
-			System.out.printf("%15s%15s%15s%15s%15s%15s", gym.getGymId(), gym.getGymName(), gym.getAddress(),
+			System.out.printf(ColorConstants.BOLD_TEXT+ ColorConstants.BLUE+"%15s%15s%15s%15s%15s%15s", gym.getGymId(), gym.getGymName(), gym.getAddress(),
 					gym.getSlotCount(), gym.getSeatsPerSlotCount(),
-					gym.isVerified() ? "Verified" : "Not Verified");
+					gym.isVerified() ? ColorConstants.GREEN+"Verified" : ColorConstants.RED+"Not Verified");
 		});
 		System.out.println();
-		System.out.println("=================================================================================================");
+		System.out.println(ColorConstants.BOLD_TEXT+ ColorConstants.BLUE+"================================================================================================="+ColorConstants.RESET);
 	}
 
 	public void addSlot(Scanner in, String email) {
-		System.out.println("Enter Slot Details: ");
+		System.out.println(ColorConstants.BOLD_TEXT+ ColorConstants.CYAN+"Enter Slot Details: "+ColorConstants.RESET);
 		Slot slot = new Slot();
 		slot.setSlotId(IdGenerator.generateId("Slot"));
-		System.out.print("Enter Gym Id:");
+		System.out.print(ColorConstants.BOLD_TEXT+ ColorConstants.CYAN+"Enter Gym Id:"+ColorConstants.RESET);
 		slot.setGymId(in.next());
-		System.out.print("Enter Slot Date: ");
+		System.out.print(ColorConstants.BOLD_TEXT+ ColorConstants.CYAN+"Enter Slot Date: "+ColorConstants.RESET);
 		slot.setDate(in.next());
-		System.out.print("Enter Slot Start Time: ");
+		System.out.print(ColorConstants.BOLD_TEXT+ ColorConstants.CYAN+"Enter Slot Start Time: "+ColorConstants.RESET);
 		slot.setStartTime(in.next());
-		System.out.print("Enter Slot End Time: ");
+		System.out.print(ColorConstants.BOLD_TEXT+ ColorConstants.CYAN+"Enter Slot End Time: "+ColorConstants.RESET);
 		slot.setEndTime(in.next());
-		System.out.print("Enter number of seats in slot: ");
+		System.out.print(ColorConstants.BOLD_TEXT+ ColorConstants.CYAN+"Enter number of seats in slot: "+ColorConstants.RESET);
 		try {
 			slot.setNumOfSeats(in.nextInt());
 		} catch (InputMismatchException e) {
 			System.out.println(ColorConstants.RED + e.getMessage() + ColorConstants.RESET);
 			return;
 		}
-		System.out.print("Enter Trainer: ");
+		System.out.print(ColorConstants.BOLD_TEXT+ ColorConstants.CYAN+"Enter Trainer: "+ColorConstants.RESET);
 		slot.setTrainer(in.next());
 		slot.setNumOfSeatsBooked(0);
 
@@ -304,20 +306,20 @@ public class GymOwnerFlipFitClient {
 	public void gymOwnerMenu(Scanner in, String email) throws GymNotFoundException {
 		boolean recur = true;
 		while (recur) {
-			System.out.println("\nActions:");
+			System.out.println(ColorConstants.BOLD_TEXT+ ColorConstants.BLUE+"================================================================================================="+ColorConstants.RESET);
+			System.out.println(ColorConstants.BOLD_TEXT+ ColorConstants.YELLOW+"\n                                      Actions:"+ColorConstants.RESET);
+			System.out.println(ColorConstants.BOLD_TEXT+ ColorConstants.BLUE+"================================================================================================="+ColorConstants.RESET);
+			System.out.println(ColorConstants.BOLD_TEXT+ ColorConstants.BLUE+"1. View Profile"+ColorConstants.RESET);
+			System.out.println(ColorConstants.BOLD_TEXT+ ColorConstants.BLUE+"2. Edit Profile"+ColorConstants.RESET);
+			System.out.println(ColorConstants.BOLD_TEXT+ ColorConstants.BLUE+"3. Add Gym"+ColorConstants.RESET);
+			System.out.println(ColorConstants.BOLD_TEXT+ ColorConstants.BLUE+"4. Edit Gym"+ColorConstants.RESET);
+			System.out.println(ColorConstants.BOLD_TEXT+ ColorConstants.BLUE+"5. Add Slot"+ColorConstants.RESET);
+			System.out.println(ColorConstants.BOLD_TEXT+ ColorConstants.BLUE+"6. View All Gym Details"+ColorConstants.RESET);
+			System.out.println(ColorConstants.BOLD_TEXT+ ColorConstants.BLUE+"7. LogOut\n"+ColorConstants.RESET);
 
-			System.out.println("1. View Profile");
-			System.out.println("2. Edit Profile");
-			System.out.println("3. Add Gym");
-			System.out.println("4. Edit Gym");
-			System.out.println("5. Add Slot");
-			System.out.println("6. View All Gym Details");
-			System.out.println("7. LogOut\n");
-
-			System.out.print("Enter Your Choice: " );
+			System.out.print(ColorConstants.BOLD_TEXT+ ColorConstants.CYAN+"Enter Your Choice: "+ColorConstants.RESET);
 			int choice = in.nextInt();
 
-			System.out.println("______________________________________________________________\n");
 
 			switch (choice) {
 				case 1:

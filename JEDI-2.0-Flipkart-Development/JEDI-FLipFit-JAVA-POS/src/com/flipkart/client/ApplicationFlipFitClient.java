@@ -21,14 +21,14 @@ public class ApplicationFlipFitClient {
 		// Format the date and time
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 		String formattedDateTime = currentDateTime.format(formatter);
-		System.out.println("=========================================");
-		System.out.println(ColorConstants.BOLD_TEXT+ColorConstants.BLUE+"            LogIn Details                "+ ColorConstants.RESET);
-		System.out.println("=========================================");
-		System.out.print(ColorConstants.BOLD_TEXT+ CYAN+"Enter Email: "+ColorConstants.RESET);
+		System.out.println(ColorConstants.BLUE+"============================================="+ColorConstants.RESET);
+		System.out.println(ColorConstants.BOLD_TEXT+ ColorConstants.YELLOW+"               LOGIN DETAILS                   "+ ColorConstants.RESET);
+		System.out.println(ColorConstants.BLUE+"============================================="+ColorConstants.RESET);
+		System.out.print(ColorConstants.BOLD_TEXT+ ColorConstants.CYAN+"Enter Email: "+ColorConstants.RESET);
 		String userEmail = in.next();
-		System.out.print(ColorConstants.BOLD_TEXT+ CYAN+"Enter Password: "+ColorConstants.RESET);
+		System.out.print(ColorConstants.BOLD_TEXT+ ColorConstants.CYAN+"Enter Password: "+ColorConstants.RESET);
 		String password = in.next();
-		System.out.print(ColorConstants.BOLD_TEXT+ CYAN+"Enter Role ID: 1. Customer 2. Gym Owner 3. Gym Administrator "+ColorConstants.RESET);
+		System.out.print(ColorConstants.BOLD_TEXT+ ColorConstants.CYAN+"Enter Role ID: "+ColorConstants.BOLD_TEXT+ ColorConstants.BLUE+"1. Customer 2. Gym Owner 3. Gym Administrator "+ColorConstants.RESET);
 		String roleCode = in.next();
 		String roleId = "Admin";
 		if (roleCode.equals("1")) // tokenizing the role id
@@ -57,7 +57,7 @@ public class ApplicationFlipFitClient {
 		}
 		try {
 			userBusiness.authenticateUser(user);
-			System.out.println("=========================================");
+			System.out.println(ColorConstants.BLUE+"============================================="+ColorConstants.RESET);
 			System.out.println(
 					ColorConstants.GREEN + "Welcome " + userEmail + "! You are logged in. " + "(" + formattedDateTime + ")"
 							+ ColorConstants.RESET);
@@ -86,9 +86,9 @@ public class ApplicationFlipFitClient {
 		int choice = 0;
 		while (choice != 4){
 			System.out.println(WELCOME_MESSAGE);
-			System.out.println("=============================================");
-			System.out.println(ColorConstants.BLUE + "\tWELCOME TO THE FLIPFIT APPLICATION!" + ColorConstants.RESET);
-			System.out.println("=============================================");
+			System.out.println(ColorConstants.BLUE+"============================================="+ColorConstants.RESET);
+			System.out.println(ColorConstants.BOLD_TEXT+ColorConstants.YELLOW + "\tWELCOME TO THE FLIPFIT APPLICATION!" + ColorConstants.RESET);
+			System.out.println(ColorConstants.BLUE+"============================================="+ColorConstants.RESET);
 			System.out.println(ColorConstants.BOLD_TEXT+ColorConstants.CYAN+"\nChoose your action:"+ColorConstants.RESET);
 			System.out.println();
 			System.out.println(ColorConstants.BOLD_TEXT+ColorConstants.BLUE+"1. Login"+ ColorConstants.RESET);

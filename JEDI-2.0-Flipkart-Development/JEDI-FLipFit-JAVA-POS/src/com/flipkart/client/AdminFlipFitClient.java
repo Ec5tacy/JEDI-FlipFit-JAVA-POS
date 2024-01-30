@@ -2,6 +2,7 @@ package com.flipkart.client;
 
 import com.flipkart.bean.Gym;
 import com.flipkart.bean.GymOwner;
+import com.flipkart.constants.ColorConstants;
 import com.flipkart.service.*;
 
 import java.util.*;
@@ -27,39 +28,31 @@ public class AdminFlipFitClient {
 	}
 
 	public void approveSingleGymOwnerRequest() {
-		System.out.print("Enter the email to approve: ");
+		System.out.print(ColorConstants.BOLD_TEXT+ ColorConstants.CYAN+"Enter the email to approve: "+ColorConstants.RESET);
 		adminBusiness.approveSingleGymOwnerRequest(sc.next());
 	}
 
 	public void approveSingleGymRequest() {
-		System.out.print("Enter gym Id to approve: ");
+		System.out.print(ColorConstants.BOLD_TEXT+ ColorConstants.CYAN+"Enter gym Id to approve: "+ColorConstants.RESET);
 		adminBusiness.approveSingleGymRequest(sc.next());
 	}
 
 	public void approvePendingGymOwnerRequests() {
 		adminBusiness.approveAllPendingGymOwnerRequests();
-		System.out.println("All pending gym owner requests approved successfully.");
+		System.out.println(ColorConstants.BOLD_TEXT+ ColorConstants.GREEN+"All pending gym owner requests approved successfully."+ColorConstants.RESET);
 	}
 
 	public void approvePendingGymRequests() {
 		adminBusiness.approveAllPendingGymRequests();
-		System.out.println("All pending gym requests approved successfully.");
+		System.out.println(ColorConstants.BOLD_TEXT+ ColorConstants.GREEN+"All pending gym requests approved successfully."+ColorConstants.RESET);
 	}
 
 	public void adminMenu(Scanner in) throws Exception {
 		System.out.println("================= Admin FlipFit =================");
 		while (true) {
-			System.out.println("1. View All Gyms");
-			System.out.println("2. View All Gym Owners");
-			System.out.println("3. View All Pending Gym Owner Requests");
-			System.out.println("4. View All Pending Gym Requests");
-			System.out.println("5. Approve All Pending Gym Owner Requests");
-			System.out.println("6. Approve All Pending Gym Requests");
-			System.out.println("7. Approve Single Gym Owner Request");
-			System.out.println("8. Approve Single Gym Request");
-			System.out.println("9. Exit");
+			System.out.println(ColorConstants.BOLD_TEXT+ ColorConstants.BLUE+"1. View All Gyms \n 2. View All Gym Owners \n 3. View All Pending Gym Owner Requests \n 4. View All Pending Gym Requests \n 5. Approve All Pending Gym Owner Requests \n 6. Approve All Pending Gym Requests \n 7. Approve Single Gym Owner Request \n 8. Approve Single Gym Request \n 9. Exit"+ColorConstants.RESET);
 
-			System.out.print("Enter your choice: ");
+			System.out.print(ColorConstants.BOLD_TEXT+ ColorConstants.CYAN+"Enter your choice: "+ColorConstants.RESET);
 			int choice = in.nextInt();
 			switch (choice) {
 				// Case statements
@@ -88,11 +81,12 @@ public class AdminFlipFitClient {
 					approveSingleGymRequest();
 					break;
 				case 9:
-					System.out.println("Exiting Admin FlipFit. Goodbye!");
+					System.out.println(ColorConstants.BOLD_TEXT+ ColorConstants.GREEN+"Exiting Admin FlipFit. Goodbye!"+ColorConstants.RESET);
 					return;
 				// Default case statement
 				default:
-					System.out.println("Invalid choice. Please enter a valid option.");
+					System.out.println(ColorConstants.BOLD_TEXT+ ColorConstants.RED+"Invalid choice. " +
+							ColorConstants.BOLD_TEXT+ ColorConstants.CYAN+"Please enter a valid option."+ColorConstants.RESET);
 			}
 		}
 	}
@@ -106,13 +100,15 @@ public class AdminFlipFitClient {
 //			System.out.println();
 //			System.out.println("==============================================================================================");
 //		}
-		System.out.println("========================================== All Gyms ==========================================");
+		System.out.println(ColorConstants.BOLD_TEXT+ ColorConstants.BLUE+"=============================================================================================="+ ColorConstants.RESET);
+		System.out.println(ColorConstants.BOLD_TEXT+ ColorConstants.YELLOW+"                                         ALL GYMS                                             "+ ColorConstants.RESET);
+		System.out.println(ColorConstants.BOLD_TEXT+ ColorConstants.BLUE+"=============================================================================================="+ ColorConstants.RESET);
 		gyms.forEach(gym -> {
-			System.out.printf("%15s%15s%15s%15s%15s%15s", "Gym ID", "Name", "Owner Email", "Address", "Slot Count", "Verification");
+			System.out.printf(ColorConstants.BOLD_TEXT+ ColorConstants.YELLOW+"%15s%15s%15s%15s%15s%15s", "Gym ID", "Name", "Owner Email", "Address", "Slot Count", "Verification"+ ColorConstants.RESET);
 			System.out.println();
-			System.out.printf("%15s%15s%15s%15s%15s%15s", gym.getGymId(), gym.getGymName(), gym.getOwnerEmail(), gym.getAddress(), gym.getSlotCount(), (gym.isVerified() ? "Approved" : "Pending"));
+			System.out.printf(ColorConstants.BOLD_TEXT+ ColorConstants.BLUE+"%15s%15s%15s%15s%15s%15s", gym.getGymId(), gym.getGymName(), gym.getOwnerEmail(), gym.getAddress(), gym.getSlotCount(), (gym.isVerified() ? ColorConstants.GREEN+"Approved" : ColorConstants.RED+"Pending")+ ColorConstants.RESET);
 			System.out.println();
-			System.out.println("==============================================================================================");
+			System.out.println(ColorConstants.BOLD_TEXT+ ColorConstants.BLUE+"=============================================================================================="+ ColorConstants.RESET);
 		});
 	}
 
@@ -126,14 +122,16 @@ public class AdminFlipFitClient {
 //			System.out.println("Verification: " + (gymOwner.isVerified() ? "Approved" : "Pending"));
 //			System.out.println("===================================================");
 //		}
-		System.out.println("================= All Gym Owners =================");
+		System.out.println(ColorConstants.BOLD_TEXT+ ColorConstants.BLUE+"=============================================================================================="+ ColorConstants.RESET);
+		System.out.println(ColorConstants.BOLD_TEXT+ ColorConstants.YELLOW+"                                         ALL GYM OWNERS                                           "+ ColorConstants.RESET);
+		System.out.println(ColorConstants.BOLD_TEXT+ ColorConstants.BLUE+"=============================================================================================="+ ColorConstants.RESET);
 		gymOwners.forEach(gymOwner -> {
-			System.out.println("Name: " + gymOwner.getName());
-			System.out.println("Phone Number: " + gymOwner.getPhoneNumber());
-			System.out.println("Aadhar Number: " + gymOwner.getAadharNumber());
-			System.out.println("PAN Number: " + gymOwner.getPanNumber());
-			System.out.println("Verification: " + (gymOwner.isVerified() ? "Approved" : "Pending"));
-			System.out.println("===================================================");
+			System.out.println(ColorConstants.BOLD_TEXT+ ColorConstants.CYAN+"Name: " + gymOwner.getName()+ ColorConstants.RESET);
+			System.out.println(ColorConstants.BOLD_TEXT+ ColorConstants.CYAN+"Phone Number: " + gymOwner.getPhoneNumber()+ ColorConstants.RESET);
+			System.out.println(ColorConstants.BOLD_TEXT+ ColorConstants.CYAN+"Aadhar Number: " + gymOwner.getAadharNumber()+ ColorConstants.RESET);
+			System.out.println(ColorConstants.BOLD_TEXT+ ColorConstants.CYAN+"PAN Number: " + gymOwner.getPanNumber()+ ColorConstants.RESET);
+			System.out.println(ColorConstants.BOLD_TEXT+ ColorConstants.CYAN+"Verification: " + (gymOwner.isVerified() ? ColorConstants.GREEN+"Approved" : ColorConstants.RED+"Pending")+ ColorConstants.RESET);
+			System.out.println(ColorConstants.BOLD_TEXT+ ColorConstants.BLUE+"=============================================================================================="+ ColorConstants.RESET);
 		});
 	}
 }

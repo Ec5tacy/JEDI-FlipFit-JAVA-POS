@@ -15,6 +15,7 @@ public class ColorConstants {
 	public static String CYAN = "\u001B[36m";
 	public static String WHITE = "\u001B[37m";
 
+	public static String TEAL="\u001B[38;2;0;128;128m";
 	public static String RESET = "\u001B[0m";
 	public static String GREEN_COLOR = "\u001B[32m";
 	public static String RED_COLOR = "\u001B[31m";
