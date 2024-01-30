@@ -53,6 +53,7 @@ public class UserFlipFitServiceImpl implements UserFlipFitServiceInterface {
 	 @param user The User object representing the user data
 	 @return true if the user is successfully logged out else returns false
 	 */
+
 	public boolean logout(User user) {
 		return true;
 	}

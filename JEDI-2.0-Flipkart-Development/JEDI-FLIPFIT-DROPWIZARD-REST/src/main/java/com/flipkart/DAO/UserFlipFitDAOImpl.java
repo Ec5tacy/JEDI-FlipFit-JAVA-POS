@@ -134,6 +134,20 @@ public class  UserFlipFitDAOImpl implements UserFlipFitDAO {
 		return registerSuccess;
 	}
 
+	public boolean logout(String email) {
+		Connection connection = null;
+		try {
+			connection = DBUtils.getConnection();
+			PreparedStatement statement = connection.prepareStatement(SQLConstants.SQL_DELETE_BOOKING);
+			statement.setString(1, email);
+			statement.executeUpdate();
+			return true;
+		} catch (SQLException sqlExcep) {
+//            printSQLException(sqlExcep);
+		}
+		return false;
+	}
+
 	public static void printSQLException(SQLException ex) {
 		for (Throwable e : ex) {
 			if (e instanceof SQLException) {

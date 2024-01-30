@@ -51,9 +51,10 @@ public class GymUserFlipfitCustomer {
         }
     }
 
-    @GET
-    @Path("/login/{email}")
-    public Response authorizeUser(@PathParam("email") String email, User user) {
+    @POST
+    @Path("/login")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response authorizeUser(User user) {
         try {
             userBusiness.authenticateUser(user);
             return Response.ok("Authenticated the user successfully!").build();
@@ -62,9 +63,9 @@ public class GymUserFlipfitCustomer {
         }
     }
 
-    @GET
-    @Path("/logout/{email}")
-    public Response LogOut(@PathParam("email") String email, User user) {
+    @POST
+    @Path("/logout")
+    public Response LogOut(User user) {
         userBusiness.logout(user);
         return Response.ok("Logged out the user successfully!").build();
     }
