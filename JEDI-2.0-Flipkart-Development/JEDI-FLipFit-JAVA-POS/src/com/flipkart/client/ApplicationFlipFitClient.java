@@ -5,7 +5,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 import com.flipkart.bean.User;
-import com.flipkart.exception.InvalidInputException;
 import com.flipkart.service.UserFlipFitServiceImpl;
 import com.flipkart.constants.*;
 import com.flipkart.exception.UserNotFoundException;

@@ -2,20 +2,14 @@ package com.flipkart.client;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import com.flipkart.DAO.UserFlipFitDAOImpl;
-import com.flipkart.bean.Booking;
 import com.flipkart.bean.Customer;
 import com.flipkart.bean.Gym;
 import com.flipkart.bean.Slot;
 import com.flipkart.constants.ColorConstants;
 import com.flipkart.exception.CustomerNotFoundException;
-import com.flipkart.exception.GymOwnerNotFoundException;
 import com.flipkart.service.CustomerFlipFitServiceImpl;
 import com.flipkart.service.UserFlipFitServiceImpl;
 import com.flipkart.exception.SlotNotFoundException;

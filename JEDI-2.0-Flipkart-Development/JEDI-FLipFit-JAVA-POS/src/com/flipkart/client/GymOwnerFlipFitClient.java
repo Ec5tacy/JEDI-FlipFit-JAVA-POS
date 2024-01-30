@@ -3,13 +3,11 @@ package com.flipkart.client;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
-import java.util.regex.*;
 
 import com.flipkart.DAO.UserFlipFitDAOImpl;
 import com.flipkart.bean.Gym;
 import com.flipkart.bean.GymOwner;
 import com.flipkart.bean.Slot;
-import com.flipkart.bean.User;
 import com.flipkart.service.GymOwnerFlipFitServiceImpl;
 import com.flipkart.service.UserFlipFitServiceImpl;
 import com.flipkart.constants.ColorConstants;
@@ -18,7 +16,6 @@ import com.flipkart.exception.GymOwnerNotFoundException;
 import com.flipkart.exception.UnauthorizedAccessException;
 import com.flipkart.exception.UserAlreadyExistsException;
 import com.flipkart.utils.IdGenerator;
-import com.flipkart.DAO.UserFlipFitDAOImpl;
 import com.flipkart.validator.EmailFlipfitValidator;
 import com.flipkart.validator.LengthFlipfitValidator;
 
