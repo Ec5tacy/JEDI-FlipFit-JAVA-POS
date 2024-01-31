@@ -46,6 +46,17 @@ public class GymCustomerFlipfitController {
         }
     }
 
+    @GET
+    @Path("/{email}/profile")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response viewProfile(@PathParam("email") String email) {
+        try {
+            return Response.ok(customerBusiness.getProfile(email)).build();
+        } catch (CustomerNotFoundException e) {
+            return Response.status(Response.Status.NOT_FOUND).entity(e.getMessage()).build();
+        }
+    }
+
 
     @GET
     @Path("/{email}/book")
