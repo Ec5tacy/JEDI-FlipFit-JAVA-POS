@@ -1,0 +1,697 @@
+{
+	"info": {
+		"_postman_id": "c30c2139-14d9-4309-b0bc-2ffa0207289b",
+		"name": "FlipFit APIs",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32214743"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "User",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Gym Owner Registration",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"aashna\",\n  \"phoneNumber\": \"1234567890\",\n  \"aadharNumber\": \"123456789000\",\n  \"panNumber\": \"1234567890\",\n  \"email\": \"aashna1@gmail.com\",\n  \"password\": \"aashna1\",\n  \"roleId\": \"GymOwner\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/gymOwnerRegistration/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"gymOwnerRegistration",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Customer Registration",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Aashna Ch\",\n  \"phoneNumber\": \"9783971720\",\n  \"age\": 22,\n  \"address\": \"blr\",\n  \"email\": \"aashna.ch@gmail.com\",\n  \"password\": \"aashna\",\n  \"roleId\": \"Customer\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/customerRegistration",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"customerRegistration"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"aashna.ch@gmail.com\",\n  \"password\": \"aashna\",\n  \"roleId\": \"Customer\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/login/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"login",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "GymAdmin",
+			"item": [
+				{
+					"name": "View Gyms",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/v1/admin/viewGyms",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"admin",
+								"viewGyms"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "View Gym Owners",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/v1/admin/viewGymOwners",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"admin",
+								"viewGymOwners"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "view pending Gym Owners",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/v1/admin/viewPendingGymOwners",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"admin",
+								"viewPendingGymOwners"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "view pending gyms",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/v1/admin/viewPendingGyms",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"admin",
+								"viewPendingGyms"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Approve Gym Owner",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/v1/admin/approveGymOwner/aa@gmail.com",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"admin",
+								"approveGymOwner",
+								"aa@gmail.com"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Approve all Gym Owners",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/v1/admin/approveGymOwners",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"admin",
+								"approveGymOwners"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "approve gym by id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/v1/admin/approveGym/Gym_1311",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"admin",
+								"approveGym",
+								"Gym_1311"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "approve all gyms",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "GymOwner",
+			"item": [
+				{
+					"name": "Registration",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\" : \"gOwner1@gmail.com\",\n    \"password\" : \"gOwner\",\n    \"roleId\" : \"GymOwner\",\n    \"name\" : \"g1\",\n    \"phoneNumber\" : \"1234567890\",\n    \"aadharNumber\" : \"123456789012\",\n    \"panNumber\" : \"1234567890\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/gymowners/registration/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"gymowners",
+								"registration",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "View Profile",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/v1/gymowners/srivastavasahil@gmail.com/profile",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"gymowners",
+								"srivastavasahil@gmail.com",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Gym",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"gymName\" : \"Gym-1\",\n    \"ownerEmail\" : \"gymo1@gmail.com\",\n    \"address\" : \"blr\",\n    \"slotCount\" : 2,\n    \"seatsPerSlotCount\": 3\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/gymowners/gymo1@gmail.com/addGym",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"gymowners",
+								"gymo1@gmail.com",
+								"addGym"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Slot",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"slotId\" : \"S1\",\n    \"date\" : \"2024-01-01\",\n    \"startTime\" : \"6\",\n    \"endTime\" : \"9\",\n    \"numOfSeats\" : 3,\n    \"trainer\": \"Sahil\",\n    \"gymId\" : \"Gym_5142\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/gymowners/srivastavasahil@gmail.com/addSlot",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"gymowners",
+								"srivastavasahil@gmail.com",
+								"addSlot"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "View Gyms",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/v1/gymowners/srivastavasahil@gmail.com/gyms",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"gymowners",
+								"srivastavasahil@gmail.com",
+								"gyms"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Gym",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"gymId\" : \"Gym_5142\",\n    \"gymName\" : \"Gym-2\",\n    \"ownerEmail\" : \"srivastavasahil@gmail.com\",\n    \"address\" : \"blr\",\n    \"slotCount\" : 2,\n    \"seatsPerSlotCount\": 3,\n    \"isVerified\" : 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/gymowners/srivastavasahil@gmail.com/editGym",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"gymowners",
+								"srivastavasahil@gmail.com",
+								"editGym"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "GymCustomer",
+			"item": [
+				{
+					"name": "Registration",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Aashna Chourasia\",\n  \"phoneNumber\": \"1234567890\",\n  \"age\": 12,\n  \"address\": \"qwer\",\n  \"email\": \"aashnacc@gmail.com\",\n  \"password\": \"1234567890\",\n  \"roleId\": \"Customer\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/customers/registration",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"customers",
+								"registration"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "View Profile",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/v1/customers/qaz@qaz.com/profile",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"customers",
+								"qaz@qaz.com",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Profile",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"qaz@qaz.com\",\n    \"password\": null,\n    \"roleId\": null,\n    \"name\": \"qqz\",\n    \"phoneNumber\": \"1234567890\",\n    \"age\": 21,\n    \"address\": \"qwerty\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/customers/qaz@qaz.com/profile",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"customers",
+								"qaz@qaz.com",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "View Gyms",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/v1/customers/qaz@qaz.com/book?city=blr",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"customers",
+								"qaz@qaz.com",
+								"book"
+							],
+							"query": [
+								{
+									"key": "city",
+									"value": "blr"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Slots",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/v1/customers/qaz@qaz.com/book/Gym_121?city=blr",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"customers",
+								"qaz@qaz.com",
+								"book",
+								"Gym_121"
+							],
+							"query": [
+								{
+									"key": "city",
+									"value": "blr"
+								},
+								{
+									"key": "date",
+									"value": "2024-01-31",
+									"disabled": true
+								},
+								{
+									"key": "slotId",
+									"value": "S123",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Book slot",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/v1/customers/qaz@qaz.com/book?gymId=Gym_121&date=2024-01-31&slotId=S123",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"customers",
+								"qaz@qaz.com",
+								"book"
+							],
+							"query": [
+								{
+									"key": "gymId",
+									"value": "Gym_121"
+								},
+								{
+									"key": "date",
+									"value": "2024-01-31"
+								},
+								{
+									"key": "slotId",
+									"value": "S123"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "View Bookings",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/v1/customers/qaz@qaz.com/bookings",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"customers",
+								"qaz@qaz.com",
+								"bookings"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cancel Booking",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/v1/customers/qaz@qaz.com/bookings/cancel?bookingId=Booking_1514",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"customers",
+								"qaz@qaz.com",
+								"bookings",
+								"cancel"
+							],
+							"query": [
+								{
+									"key": "bookingId",
+									"value": "Booking_1514"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
